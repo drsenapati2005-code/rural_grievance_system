@@ -1,0 +1,10 @@
+# GRIEVANCES DATABASE
+# NEXT_TICKET_ID: 1008
+# ticket_id|citizen_id|village_id|dept_id|is_hazard|priority|days_pending|assigned_official_id|status|submitted_at|resolved_at|rating|description|remarks|feedback
+1001|1|1|1|1|10|9|-1|Escalated|2026-11-24 17:15:12||0|High-tension live wire fallen across school road. Severe electrocution risk.|Sent to divisional lineman.|
+1002|2|2|0|0|5|8|-1|Pending|2026-11-24 17:15:12||0|Community handpump broken. 300 families without drinking water.||
+1003|3|3|2|1|10|4|-1|In Progress|2026-11-24 17:15:12||0|Large pothole filled with stagnant water blocking ambulance route to PHC.|Road crew dispatched. Repair ETA 2 days.|
+1004|4|4|4|0|5|2|-1|Pending|2026-11-24 17:15:12||0|MNREGA October wages not credited. 45 labourers affected.||
+1005|5|5|3|0|5|5|-1|Pending|2026-11-24 17:15:12||0|Open drain overflowing near primary school. Health hazard.||
+1006|1|1|1|0|5|0|-1|Resolved|2026-11-24 17:15:12|2026-11-24 17:15:12|4|All street lights on main bazaar road non-functional for 5 nights.|Fuse replaced and all lights restored.|Fixed quickly, good work!
+1007|2|2|0|1|10|1|-1|Pending|2026-11-24 17:15:12||0|Tap water appears brown/contaminated. Children falling sick.||

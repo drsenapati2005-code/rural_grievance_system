@@ -1,0 +1,6 @@
+# OFFICIAL ACCOUNTS REGISTRY
+# NEXT_OFFICIAL_ID: 104
+# official_id|username|password|dept_assigned|active|name
+101|sverma|pass101|1|1|Suresh Verma
+102|apandey|pass102|0|1|Anita Pandey
+103|rtiwari|pass103|2|1|Rajan Tiwari
