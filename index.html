@@ -4,321 +4,94 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Rural Public Service Request & Grievance Management System</title>
-<style>
-/* ═══════════════════════════ RESET & TOKENS ═══════════════════════════ */
-*{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --bg:#0d1117; --surface:#161b22; --surface2:#1c2128; --surface3:#22272e;
-  --border:#30363d; --border2:#3d444d;
-  --accent:#58a6ff; --accent2:#1f6feb;
-  --green:#3fb950; --green-bg:#1a3626;
-  --red:#f85149; --red-bg:#3c1618;
-  --yellow:#d29922; --yellow-bg:#2f2217;
-  --orange:#e3b341; --orange-bg:#2e220a;
-  --purple:#a371f7; --purple-bg:#2a1e4a;
-  --cyan:#39c5cf; --cyan-bg:#0d2e35;
-  --text:#e6edf3; --muted:#7d8590; --muted2:#9198a1;
-  --radius:8px; --radius-lg:12px;
-  --font:'Segoe UI',system-ui,sans-serif;
-  --mono:'Consolas','Cascadia Code',monospace;
-}
-
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh;}
-
-/* ═══════════════════════════ HEADER ═══════════════════════════ */
-.app-header{
-  background:linear-gradient(90deg,#0d1b2a,#1a2744);
-  border-bottom:1px solid var(--border);
-  padding:14px 24px;
-  display:flex; align-items:center; gap:14px;
-}
-.app-header .logo{font-size:1.5rem;}
-.app-header h1{font-size:1.1rem;font-weight:700;color:var(--accent);}
-.app-header p{font-size:.78rem;color:var(--muted);margin-top:2px;}
-.app-header .badges{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.hbadge{
-  font-size:.7rem;font-weight:600;padding:3px 10px;
-  border-radius:99px;border:1px solid var(--border2);
-  background:var(--surface2);color:var(--muted2);
-}
-
-/* ═══════════════════════════ TABS ═══════════════════════════ */
-.tab-bar{
-  display:flex; background:var(--surface); border-bottom:1px solid var(--border);
-  overflow-x:auto; white-space:nowrap;
-}
-.tab-btn{
-  padding:12px 20px; cursor:pointer; color:var(--muted);
-  font-weight:600; font-size:.85rem;
-  border-bottom:2px solid transparent;
-  transition:color .2s, border-color .2s;
-  user-select:none; flex-shrink:0;
-}
-.tab-btn:hover{color:var(--text);}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
-
-.panel{display:none;padding:24px 28px;min-height:calc(100vh - 110px);}
-.panel.active{display:block;}
-
-/* ═══════════════════════════ LAYOUT HELPERS ═══════════════════════════ */
-.row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
-.col{flex:1;min-width:260px;}
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:18px;
-}
-.card-title{
-  font-size:.75rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.06em;color:var(--muted);margin-bottom:12px;
-}
-.section-head{
-  display:flex;align-items:center;gap:8px;
-  font-size:.95rem;font-weight:700;color:var(--accent);
-  margin:22px 0 12px;
-}
-.section-head::after{content:'';flex:1;height:1px;background:var(--border);}
-
-/* ═══════════════════════════ KPI CARDS ═══════════════════════════ */
-.kpi-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;}
-.kpi{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:16px 20px;
-  flex:1;min-width:120px;
-}
-.kpi-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px;}
-.kpi-value{font-size:2rem;font-weight:800;line-height:1;}
-.kpi-value.blue{color:var(--accent);}
-.kpi-value.green{color:var(--green);}
-.kpi-value.red{color:var(--red);}
-.kpi-value.yellow{color:var(--orange);}
-.kpi-value.purple{color:var(--purple);}
-
-/* ═══════════════════════════ TABLES ═══════════════════════════ */
-.tbl-wrap{overflow-x:auto;border-radius:var(--radius);}
-table{width:100%;border-collapse:collapse;min-width:460px;}
-thead th{
-  background:var(--surface2);color:var(--muted);
-  font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
-  padding:10px 14px;text-align:left;white-space:nowrap;
-}
-tbody td{
-  padding:10px 14px;border-bottom:1px solid var(--border);
-  font-size:.83rem;vertical-align:middle;
-}
-tbody tr:last-child td{border-bottom:none;}
-tbody tr:hover td{background:var(--surface2);}
-
-/* ═══════════════════════════ BADGES ═══════════════════════════ */
-.badge{
-  display:inline-block;padding:3px 10px;border-radius:99px;
-  font-size:.72rem;font-weight:700;white-space:nowrap;
-}
-.badge-pending  {background:#1f2d1a;color:#7ee787;border:1px solid #238636;}
-.badge-progress {background:var(--yellow-bg);color:var(--orange);border:1px solid var(--yellow);}
-.badge-escalated{background:var(--red-bg);color:#ff7b72;border:1px solid #da3633;
-                 animation:pulse-red 1.3s infinite;}
-.badge-resolved {background:var(--cyan-bg);color:var(--cyan);border:1px solid #1b6f74;}
-@keyframes pulse-red{0%,100%{opacity:1;}50%{opacity:.6;}}
-
-.priority-pill{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:30px;height:24px;border-radius:6px;
-  font-size:.75rem;font-weight:800;
-}
-.p10{background:#3c1618;color:#ff7b72;border:1px solid #da3633;}
-.p5 {background:#1f2d3d;color:#79c0ff;border:1px solid #1f6feb;}
-
-.village-chip{
-  background:var(--surface2);color:var(--accent);
-  padding:2px 8px;border-radius:5px;font-size:.72rem;
-  border:1px solid var(--border2);
-}
-.dept-chip{
-  background:var(--purple-bg);color:var(--purple);
-  padding:2px 8px;border-radius:5px;font-size:.72rem;
-  border:1px solid var(--purple);
-}
-.stars{color:var(--orange);}
-
-/* ═══════════════════════════ FORMS ═══════════════════════════ */
-.form-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
-.fg{display:flex;flex-direction:column;gap:5px;flex:1;min-width:160px;}
-.fg label{font-size:.75rem;font-weight:600;color:var(--muted);}
-input,select,textarea{
-  background:var(--surface2);border:1px solid var(--border2);
-  color:var(--text);padding:8px 12px;border-radius:var(--radius);
-  font-size:.85rem;width:100%;font-family:var(--font);
-  transition:border-color .2s;
-}
-input:focus,select:focus,textarea:focus{
-  outline:none;border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(88,166,255,.12);
-}
-textarea{resize:vertical;min-height:70px;}
-
-/* ═══════════════════════════ BUTTONS ═══════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 18px;border-radius:var(--radius);border:none;
-  cursor:pointer;font-weight:600;font-size:.83rem;
-  transition:.18s;white-space:nowrap;
-}
-.btn:hover{filter:brightness(1.12);}
-.btn-primary{background:var(--accent2);color:#fff;}
-.btn-success{background:#196c2e;color:#7ee787;}
-.btn-danger {background:#b62324;color:#ffa198;}
-.btn-warn   {background:#7d4e00;color:var(--orange);}
-.btn-purple {background:#3a1f70;color:var(--purple);}
-.btn-ghost  {background:var(--surface3);color:var(--text);border:1px solid var(--border2);}
-.btn-sm     {padding:5px 12px;font-size:.76rem;}
-.btn-row    {display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
-
-/* ═══════════════════════════ ALERTS ═══════════════════════════ */
-.alert{padding:12px 16px;border-radius:var(--radius);margin-bottom:14px;font-size:.84rem;line-height:1.5;}
-.alert-danger {background:var(--red-bg);border:1px solid #da3633;color:#ffa198;}
-.alert-success{background:var(--green-bg);border:1px solid #238636;color:#7ee787;}
-.alert-info   {background:#132337;border:1px solid var(--accent2);color:#79c0ff;}
-.alert-warn   {background:var(--yellow-bg);border:1px solid var(--yellow);color:var(--orange);}
-
-/* ═══════════════════════════ RECEIPT BOX ═══════════════════════════ */
-.receipt{
-  background:var(--surface2);border:1px solid var(--green);
-  border-radius:var(--radius-lg);padding:18px;
-  font-family:var(--mono);font-size:.82rem;line-height:1.9;
-  color:var(--green);
-}
-.receipt .r-label{color:var(--muted);}
-
-/* ═══════════════════════════ PQ ITEM ═══════════════════════════ */
-.pq-item{
-  background:var(--surface2);border:1px solid var(--border);
-  border-radius:var(--radius);padding:12px 16px;
-  display:flex;align-items:center;gap:14px;margin-bottom:8px;
-}
-.pq-rank{font-size:1.3rem;font-weight:900;color:var(--muted);min-width:30px;}
-.pq-info{flex:1;}
-.pq-ticket{font-size:.95rem;font-weight:700;color:var(--accent);}
-.pq-sub{font-size:.78rem;color:var(--muted);margin-top:2px;}
-.pq-item.pq-escalated{border-color:#da3633;background:var(--red-bg);}
-
-/* ═══════════════════════════ DS VISUALIZER ═══════════════════════════ */
-.ds-block{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:14px;margin-bottom:14px;
-}
-.ds-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;
-        letter-spacing:.08em;color:var(--purple);margin-bottom:8px;}
-
-/* Linked list nodes */
-.ll-chain{display:flex;align-items:center;flex-wrap:wrap;gap:4px;overflow-x:auto;padding-bottom:6px;}
-.ll-node{
-  background:var(--surface3);border:1px solid var(--border2);
-  border-radius:6px;padding:6px 10px;font-size:.72rem;
-  display:inline-flex;flex-direction:column;gap:1px;min-width:70px;
-}
-.ll-node .ll-id{font-weight:800;color:var(--accent);font-size:.8rem;}
-.ll-node .ll-info{color:var(--muted);}
-.ll-arrow{color:var(--muted);font-size:.9rem;flex-shrink:0;}
-.ll-null{color:var(--muted);font-size:.72rem;font-family:var(--mono);}
-
-/* BST visual */
-.bst-row{display:flex;align-items:center;gap:8px;padding:5px 0;
-         border-bottom:1px solid var(--border);font-size:.8rem;}
-.bst-row:last-child{border-bottom:none;}
-.bst-id{color:var(--accent);font-weight:700;min-width:46px;}
-
-/* Stack visual */
-.stack-item{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:7px 10px;border-left:3px solid var(--purple);
-  background:var(--surface3);border-radius:0 6px 6px 0;
-  margin-bottom:5px;font-size:.78rem;
-}
-.stack-num{
-  background:var(--purple);color:#fff;border-radius:50%;
-  width:20px;height:20px;display:flex;align-items:center;
-  justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;
-}
-
-/* Graph matrix */
-.graph-wrap{overflow-x:auto;}
-.g-table{border-collapse:separate;border-spacing:3px;}
-.g-cell{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:52px;height:36px;border-radius:5px;
-  font-size:.78rem;font-weight:700;
-}
-.g-road{background:#1a3626;color:var(--green);border:1px solid #238636;}
-.g-none{background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
-.g-diag{background:var(--surface3);color:var(--accent);border:1px solid var(--border2);}
-
-/* Dijkstra path */
-.path-chain{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:8px;}
-.path-node{background:var(--accent2);color:#fff;padding:4px 12px;border-radius:99px;font-size:.78rem;font-weight:600;}
-.path-sep{color:var(--muted);}
-
-/* Toast */
-#toast{
-  position:fixed;bottom:24px;right:24px;padding:12px 20px;
-  border-radius:var(--radius);font-size:.84rem;font-weight:600;
-  display:none;z-index:9999;max-width:340px;
-  animation:slideUp .28s ease;
-}
-@keyframes slideUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-/* Auth overlay */
-.auth-box{max-width:380px;margin:0 auto;}
-.auth-title{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:18px;}
-
-/* Detail card */
-.detail-grid{display:grid;grid-template-columns:140px 1fr;gap:6px 10px;font-size:.84rem;}
-.detail-grid .dk{color:var(--muted);font-weight:600;}
-.detail-grid .dv{color:var(--text);}
-
-/* Dept filter tabs */
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
-.filter-chip{
-  padding:4px 12px;border-radius:99px;font-size:.75rem;font-weight:600;
-  cursor:pointer;border:1px solid var(--border2);
-  background:var(--surface2);color:var(--muted);transition:.15s;
-}
-.filter-chip.active-chip{background:var(--accent2);color:#fff;border-color:var(--accent2);}
-</style>
+<link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-<!-- ═══════════════════════════════ APP HEADER ═══════════════════════════════ -->
-<div class="app-header">
-  <div class="logo">🌾</div>
-  <div>
-    <h1>Rural Public Service Request &amp; Grievance Management System</h1>
-    <p>Panchayat Service Portal · Offline Dashboard</p>
-  </div>
-  <div class="badges">
-    <span class="hbadge">📊 Live Dashboard</span>
-    <span class="hbadge">🗺 Road Network</span>
-    <span class="hbadge">💾 Offline Mode</span>
-  </div>
-</div>
+<!-- ═══════════════════════════════ TOP STICKY SHELL ═══════════════════════════════ -->
+<header class="top-shell">
+  <div class="heritage-ribbon"></div>
+  <div class="top-inner">
+    <div class="app-header">
+      <div class="logo">🌾</div>
+      <div>
+        <h1>Rural Public Service Request &amp; Grievance Management System</h1>
+        <p>Gram Panchayat Seva &amp; Citizen Grievance Kendra</p>
+      </div>
+      <div class="badges">
+        <span class="hbadge">🌱 Gram Swaraj Portal</span>
+        <span class="hbadge">🗺 Block Road Network</span>
+        <span class="hbadge">🏛 Panchayat Kendra</span>
+      </div>
+    </div>
 
-<!-- ═══════════════════════════════ TABS ═══════════════════════════════ -->
-<div class="tab-bar">
-  <div class="tab-btn active"  onclick="switchTab('overview')">📊 Overview</div>
-  <div class="tab-btn"         onclick="switchTab('citizen')">👤 Citizen</div>
-  <div class="tab-btn"         onclick="switchTab('official')">🔧 Official</div>
-  <div class="tab-btn"         onclick="switchTab('admin')">🛡 Admin</div>
-  <div class="tab-btn"         onclick="switchTab('graph')">🗺 Road Graph</div>
-</div>
+    <nav class="tab-bar" aria-label="Portal Navigation">
+      <div class="tab-btn active"  data-tab="overview" onclick="switchTab('overview')">📊 Overview</div>
+      <div class="tab-btn"         data-tab="citizen"  onclick="switchTab('citizen')">👤 Citizen</div>
+      <div class="tab-btn"         data-tab="official" onclick="switchTab('official')">🔧 Field Officer</div>
+      <div class="tab-btn"         data-tab="graph"    onclick="switchTab('graph')">🗺 Road Network</div>
+    </nav>
+  </div>
+</header>
+
+<main class="main-shell">
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
      PANEL 1 — OVERVIEW DASHBOARD
 ═══════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-overview" class="panel active">
+  <section class="village-hero" aria-label="Gram Panchayat Welcome Banner">
+    <div class="village-hero-text">
+      <div class="village-hero-eyebrow">🌾 Gram Panchayat Public Service Desk</div>
+      <h2 class="village-hero-title">Empowering Rural Communities with Transparent Redressal</h2>
+      <p class="village-hero-sub">
+        Lodge drinking water, electricity, road, sanitation, or welfare service requests directly with block field officers and monitor resolution across Rampur, Sitapur, Gopalpur, Krishnapur, and Balipur.
+      </p>
+      <div class="village-hero-actions">
+        <button class="btn btn-primary btn-sm" onclick="switchTab('citizen')">📝 Citizen Portal &amp; Filing</button>
+        <button class="btn btn-ghost btn-sm" onclick="switchTab('graph')">🗺 Explore Village Road Map</button>
+      </div>
+    </div>
+    <div class="village-hero-art" aria-hidden="true">
+      <svg width="240" height="118" viewBox="0 0 240 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="186" cy="30" r="18" fill="#FDE68A"/>
+        <circle cx="186" cy="30" r="11" fill="#F59E0B" fill-opacity="0.85"/>
+        <path d="M0 90C38 66 86 68 134 86C174 100 212 88 240 76V118H0V90Z" fill="#D1FAE5"/>
+        <path d="M0 98C52 78 102 88 158 98C194 104 220 96 240 90V118H0V98Z" fill="#A7F3D0"/>
+        <path d="M18 118C70 96 146 98 240 112V118H18Z" fill="#2D6A4F" fill-opacity="0.22"/>
+        <!-- Trees -->
+        <rect x="33" y="64" width="5" height="24" rx="2" fill="#78350F"/>
+        <circle cx="35.5" cy="56" r="14" fill="#2D6A4F"/>
+        <circle cx="27" cy="61" r="9" fill="#15803D"/>
+        <circle cx="44" cy="61" r="9" fill="#15803D"/>
+        <rect x="206" y="68" width="4" height="20" rx="2" fill="#78350F"/>
+        <circle cx="208" cy="61" r="11" fill="#1B4332"/>
+        <!-- Panchayat Hall / Village Cottages -->
+        <rect x="86" y="64" width="54" height="30" rx="2" fill="#FFFDF8" stroke="#785834" stroke-width="1.5"/>
+        <path d="M78 66L113 44L148 66H78Z" fill="#C2410C"/>
+        <rect x="107" y="75" width="12" height="19" rx="1.5" fill="#92400E"/>
+        <rect x="93" y="73" width="8" height="8" rx="1" fill="#FEF3C7" stroke="#92400E" stroke-width="1"/>
+        <rect x="125" y="73" width="8" height="8" rx="1" fill="#FEF3C7" stroke="#92400E" stroke-width="1"/>
+        <!-- Flag mast -->
+        <line x1="113" y1="30" x2="113" y2="44" stroke="#78350F" stroke-width="1.5"/>
+        <rect x="113" y="30" width="11" height="3" fill="#EA580C"/>
+        <rect x="113" y="33" width="11" height="2.5" fill="#FFFFFF"/>
+        <rect x="113" y="35.5" width="11" height="2.5" fill="#15803D"/>
+        <!-- Village Cottage 2 -->
+        <rect x="150" y="74" width="32" height="20" rx="2" fill="#FAF5EB" stroke="#785834" stroke-width="1.4"/>
+        <path d="M145 75L166 61L187 75H145Z" fill="#D97706"/>
+        <rect x="162" y="82" width="8" height="12" rx="1" fill="#78350F"/>
+        <!-- Soil road curve -->
+        <path d="M113 94C115 104 102 110 82 118H126C124 109 118 102 115 94H113Z" fill="#D6C29F"/>
+      </svg>
+    </div>
+  </section>
+
   <div id="kpi-row" class="kpi-grid"></div>
 
-  <div class="row">
-    <div class="col" style="flex:2;min-width:320px;">
-      <div class="section-head">📋 Department-wise Backlog</div>
+  <div class="grid-main-side">
+    <div>
+      <div class="section-head">📋 Department Workload Summary</div>
       <div class="tbl-wrap">
         <table>
           <thead><tr><th>Department</th><th>Total</th><th>Pending</th><th>In&nbsp;Progress</th><th>Escalated</th><th>Resolved</th><th>Avg ★</th></tr></thead>
@@ -326,8 +99,8 @@ textarea{resize:vertical;min-height:70px;}
         </table>
       </div>
     </div>
-    <div class="col" style="min-width:240px;">
-      <div class="section-head">🏘 Village-wise Pending</div>
+    <div>
+      <div class="section-head">🏘 Village-wise Active Cases</div>
       <div class="tbl-wrap">
         <table>
           <thead><tr><th>Village</th><th>Total</th><th>Active</th></tr></thead>
@@ -337,8 +110,16 @@ textarea{resize:vertical;min-height:70px;}
     </div>
   </div>
 
-  <div class="section-head">📂 All Grievance Records</div>
-  <div class="filter-row" id="ledger-filters"></div>
+  <div class="section-head">📂 Grievance Register</div>
+  <div class="toolbar-row">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div class="filter-row" id="ledger-filters"></div>
+      <span id="overview-ledger-count" class="hbadge"></span>
+    </div>
+    <div class="search-box">
+      <input id="overview-search" type="search" placeholder="Search ticket #, citizen, village, or department…" oninput="renderOverview()"/>
+    </div>
+  </div>
   <div class="tbl-wrap">
     <table>
       <thead><tr><th>#ID</th><th>Citizen</th><th>Village</th><th>Department</th><th>Priority</th><th>Days</th><th>Hazard</th><th>Status</th><th>Submitted</th></tr></thead>
@@ -364,11 +145,11 @@ textarea{resize:vertical;min-height:70px;}
         </div>
       </div>
 
-      <div id="cit-login-form" style="display:none;">
-        <div class="card-title">Login</div>
+      <div id="cit-login-form" style="display:none;animation:fadeInSoft .22s var(--ease);">
+        <div class="card-title">Citizen Sign In</div>
         <div class="form-grid">
           <div class="fg"><label>Aadhaar Number</label><input id="cit-aadhaar" placeholder="e.g. 1234-5678-9101"/></div>
-          <div class="fg"><label>Phone Number</label><input id="cit-phone" placeholder="10-digit"/></div>
+          <div class="fg"><label>Phone Number</label><input id="cit-phone" placeholder="10-digit" onkeydown="if(event.key==='Enter')citizenLogin()"/></div>
         </div>
         <div class="btn-row" style="margin-top:8px;">
           <button class="btn btn-primary" onclick="citizenLogin()">🔑 Login</button>
@@ -376,14 +157,14 @@ textarea{resize:vertical;min-height:70px;}
         </div>
       </div>
 
-      <div id="cit-register-form" style="display:none;">
+      <div id="cit-register-form" style="display:none;animation:fadeInSoft .22s var(--ease);">
         <div class="card-title">New Citizen Registration</div>
         <div class="form-grid">
           <div class="fg"><label>Full Name</label><input id="reg-name" placeholder="Full name"/></div>
           <div class="fg"><label>Aadhaar Number</label><input id="reg-aadhaar" placeholder="XXXX-XXXX-XXXX"/></div>
         </div>
         <div class="form-grid">
-          <div class="fg"><label>Phone Number</label><input id="reg-phone" placeholder="10-digit"/></div>
+          <div class="fg"><label>Phone Number</label><input id="reg-phone" placeholder="10-digit" onkeydown="if(event.key==='Enter')citizenRegister()"/></div>
         </div>
         <div class="btn-row" style="margin-top:8px;">
           <button class="btn btn-success" onclick="citizenRegister()">✅ Register</button>
@@ -395,63 +176,61 @@ textarea{resize:vertical;min-height:70px;}
 
   <!-- DASHBOARD (shown after login) -->
   <div id="cit-dash" style="display:none;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div class="portal-topbar">
       <div>
-        <div style="font-size:1.1rem;font-weight:700;" id="cit-welcome"></div>
-        <div style="font-size:.78rem;color:var(--muted);" id="cit-info"></div>
+        <div class="portal-user-title" id="cit-welcome"></div>
+        <div class="portal-user-meta" id="cit-info"></div>
       </div>
-      <button class="btn btn-ghost btn-sm" style="margin-left:auto;" onclick="citizenLogout()">↩ Logout</button>
+      <button class="btn btn-ghost btn-sm" onclick="citizenLogout()">↩ Logout</button>
     </div>
 
-    <div class="row">
+    <div class="grid-main-side">
       <!-- Submit grievance -->
-      <div class="col" style="flex:3;min-width:300px;">
-        <div class="card">
-          <div class="card-title">📮 1. Submit New Grievance</div>
-          <div id="submit-alert"></div>
-          <div class="form-grid">
-            <div class="fg"><label>Village</label>
-              <select id="grv-village"></select>
-            </div>
-            <div class="fg"><label>Department / Category</label>
-              <select id="grv-dept"></select>
-            </div>
+      <div class="card">
+        <div class="card-title">📮 Lodge a New Grievance</div>
+        <div id="submit-alert"></div>
+        <div class="form-grid">
+          <div class="fg"><label>Village</label>
+            <select id="grv-village"></select>
           </div>
-          <div class="form-grid">
-            <div class="fg"><label>Description</label>
-              <textarea id="grv-desc" placeholder="Describe the problem in detail…"></textarea>
-            </div>
+          <div class="fg"><label>Department / Category</label>
+            <select id="grv-dept"></select>
           </div>
-          <div class="form-grid">
-            <div class="fg"><label>Life-Safety Hazard?</label>
-              <select id="grv-hazard">
-                <option value="0">No — Normal (Priority 5)</option>
-                <option value="1">Yes — Emergency (Priority 10)</option>
-              </select>
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="citizenSubmit()">📤 Submit Grievance</button>
-          </div>
-          <div id="submit-receipt" style="margin-top:14px;"></div>
         </div>
+        <div class="form-grid">
+          <div class="fg"><label>Description</label>
+            <textarea id="grv-desc" placeholder="Describe the problem in detail…"></textarea>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="fg"><label>Life-Safety Hazard?</label>
+            <select id="grv-hazard">
+              <option value="0">No — Standard Service Request</option>
+              <option value="1">Yes — Life-Safety Emergency (High Priority)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="citizenSubmit()">📤 Submit Grievance</button>
+        </div>
+        <div id="submit-receipt" style="margin-top:14px;"></div>
       </div>
 
       <!-- Track + reopen -->
-      <div class="col" style="min-width:260px;">
-        <div class="card" style="margin-bottom:14px;">
-          <div class="card-title">🔍 2. Track Grievance</div>
-          <div class="fg"><label>Ticket Number</label><input id="track-id" type="number" placeholder="Enter your ticket number"/></div>
-          <div class="btn-row" style="margin-top:8px;">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card">
+          <div class="card-title">🔍 Track Complaint Status</div>
+          <div class="fg"><label>Ticket Number</label><input id="track-id" type="number" placeholder="Enter your ticket number" onkeydown="if(event.key==='Enter')citizenTrack()"/></div>
+          <div class="btn-row" style="margin-top:10px;">
             <button class="btn btn-primary btn-sm" onclick="citizenTrack()">🔎 Search</button>
           </div>
           <div id="track-result" style="margin-top:12px;"></div>
         </div>
 
         <div class="card">
-          <div class="card-title">🔄 4. Reopen a Resolved Ticket</div>
-          <div class="fg"><label>Ticket Number</label><input id="reopen-id" type="number" placeholder="Enter resolved ticket number"/></div>
-          <div class="btn-row" style="margin-top:8px;">
+          <div class="card-title">🔄 Reopen Resolved Complaint</div>
+          <div class="fg"><label>Ticket Number</label><input id="reopen-id" type="number" placeholder="Enter resolved ticket number" onkeydown="if(event.key==='Enter')citizenReopen()"/></div>
+          <div class="btn-row" style="margin-top:10px;">
             <button class="btn btn-warn btn-sm" onclick="citizenReopen()">🔄 Reopen</button>
           </div>
           <div id="reopen-result" style="margin-top:10px;"></div>
@@ -460,10 +239,10 @@ textarea{resize:vertical;min-height:70px;}
     </div>
 
     <!-- My grievances -->
-    <div class="section-head">📋 3. My Grievances</div>
+    <div class="section-head">📋 My Submitted Grievances</div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>#ID</th><th>Village</th><th>Department</th><th>Priority</th><th>Days</th><th>Status</th><th>5. Feedback</th></tr></thead>
+        <thead><tr><th>#ID</th><th>Village</th><th>Department</th><th>Priority</th><th>Days</th><th>Status</th><th>Citizen Feedback</th></tr></thead>
         <tbody id="my-grievances-tbody"></tbody>
       </table>
     </div>
@@ -471,7 +250,7 @@ textarea{resize:vertical;min-height:70px;}
     <!-- Feedback modal inline -->
     <div id="feedback-panel" style="display:none;margin-top:16px;">
       <div class="card" style="max-width:420px;">
-        <div class="card-title">⭐ 5. Give Feedback — Ticket #<span id="fb-tid"></span></div>
+        <div class="card-title">⭐ Service Feedback — Ticket #<span id="fb-tid"></span></div>
         <div class="form-grid">
           <div class="fg"><label>Rating (1–5 stars)</label>
             <select id="fb-rating">
@@ -498,55 +277,51 @@ textarea{resize:vertical;min-height:70px;}
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
-     PANEL 3 — OFFICIAL PORTAL
+     PANEL 3 — FIELD OFFICER PORTAL
 ═══════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-official" class="panel">
 
   <div id="off-auth" class="auth-box">
-    <div class="auth-title">🔧 Official (Field Technician) Portal</div>
+    <div class="auth-title">🔧 Field Officer Portal</div>
     <div class="card">
       <div class="form-grid">
         <div class="fg"><label>Username</label><input id="off-uname" placeholder="Username"/></div>
-        <div class="fg"><label>Password</label><input id="off-pass" type="password" placeholder="Password"/></div>
+        <div class="fg"><label>Password</label><input id="off-pass" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')officialLogin()"/></div>
       </div>
       <div class="btn-row" style="margin-top:4px;">
-        <button class="btn btn-primary" onclick="officialLogin()">🔑 Login</button>
+        <button id="off-login-btn" class="btn btn-primary" onclick="officialLogin()">🔑 Login</button>
       </div>
+      <div id="off-lock-alert" style="margin-top:12px;"></div>
     </div>
   </div>
 
   <div id="off-dash" style="display:none;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div class="portal-topbar">
       <div>
-        <div style="font-size:1.1rem;font-weight:700;" id="off-welcome"></div>
-        <div style="font-size:.78rem;color:var(--muted);" id="off-dept-info"></div>
+        <div class="portal-user-title" id="off-welcome"></div>
+        <div class="portal-user-meta" id="off-dept-info"></div>
       </div>
-      <button class="btn btn-ghost btn-sm" style="margin-left:auto;" onclick="officialLogout()">↩ Logout</button>
+      <button class="btn btn-ghost btn-sm" onclick="officialLogout()">↩ Logout</button>
     </div>
 
-    <!-- Menu: 1 & 2 -->
-    <div class="row">
-      <div class="col" style="flex:3;min-width:300px;">
-        <div class="card">
-          <div class="card-title">📋 Assigned Tasks (Urgent First)</div>
-          <div id="off-pq-display"></div>
-        </div>
+    <div class="grid-main-side">
+      <div class="card">
+        <div class="card-title">📋 Priority Dispatch Queue (Urgent First)</div>
+        <div id="off-pq-display"></div>
       </div>
-      <div class="col" style="min-width:240px;">
-        <!-- 3. View details -->
-        <div class="card" style="margin-bottom:12px;">
-          <div class="card-title">🔎 3. View Ticket Details</div>
-          <div class="fg"><label>Ticket Number</label><input id="off-view-id" type="number" placeholder="Enter ticket number"/></div>
-          <div class="btn-row" style="margin-top:8px;">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card">
+          <div class="card-title">🔎 Lookup Ticket Details</div>
+          <div class="fg"><label>Ticket Number</label><input id="off-view-id" type="number" placeholder="Enter ticket number" onkeydown="if(event.key==='Enter')officialViewDetails()"/></div>
+          <div class="btn-row" style="margin-top:10px;">
             <button class="btn btn-primary btn-sm" onclick="officialViewDetails()">View</button>
           </div>
           <div id="off-detail-result" style="margin-top:10px;"></div>
         </div>
-        <!-- 5. Escalate -->
         <div class="card">
-          <div class="card-title">🚨 5. Escalate Ticket</div>
-          <div class="fg"><label>Ticket Number</label><input id="off-esc-id" type="number" placeholder="Enter ticket number to escalate"/></div>
-          <div class="btn-row" style="margin-top:8px;">
+          <div class="card-title">🚨 Escalate Urgent Ticket</div>
+          <div class="fg"><label>Ticket Number</label><input id="off-esc-id" type="number" placeholder="Enter ticket number to escalate" onkeydown="if(event.key==='Enter')officialEscalate()"/></div>
+          <div class="btn-row" style="margin-top:10px;">
             <button class="btn btn-danger btn-sm" onclick="officialEscalate()">🚨 Escalate</button>
           </div>
           <div id="off-esc-result" style="margin-top:8px;"></div>
@@ -554,124 +329,152 @@ textarea{resize:vertical;min-height:70px;}
       </div>
     </div>
 
-    <!-- 4. Update Status + 6. Resolve -->
-    <div class="row">
-      <div class="col">
-        <div class="card">
-          <div class="card-title">✏ 4. Update Status &amp; Remarks</div>
-          <div class="form-grid">
-            <div class="fg"><label>Ticket Number</label><input id="off-upd-id" type="number" placeholder="Enter ticket number"/></div>
-            <div class="fg"><label>New Status</label>
-              <select id="off-upd-status">
-                <option value="In Progress">In Progress</option>
-                <option value="Pending">Pending</option>
-                <option value="Escalated">Escalated</option>
-              </select>
-            </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">✏ Update Case Status &amp; Field Notes</div>
+        <div class="form-grid">
+          <div class="fg"><label>Ticket Number</label><input id="off-upd-id" type="number" placeholder="Enter ticket number"/></div>
+          <div class="fg"><label>New Status</label>
+            <select id="off-upd-status">
+              <option value="In Progress">In Progress</option>
+              <option value="Pending">Pending</option>
+              <option value="Escalated">Escalated</option>
+            </select>
           </div>
-          <div class="form-grid">
-            <div class="fg"><label>Remarks / Field Notes</label>
-              <textarea id="off-upd-remarks" placeholder="Add field remarks…"></textarea>
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-warn" onclick="officialUpdateStatus()">💾 Update Status</button>
-          </div>
-          <div id="off-upd-result" style="margin-top:8px;"></div>
         </div>
+        <div class="form-grid">
+          <div class="fg"><label>Remarks / Field Notes</label>
+            <textarea id="off-upd-remarks" placeholder="Add field remarks…"></textarea>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-warn" onclick="officialUpdateStatus()">💾 Update Status</button>
+        </div>
+        <div id="off-upd-result" style="margin-top:8px;"></div>
       </div>
-      <div class="col">
-        <div class="card">
-          <div class="card-title">✅ 6. Mark as Resolved</div>
-          <div class="form-grid">
-            <div class="fg"><label>Ticket Number</label><input id="off-res-id" type="number" placeholder="Enter ticket number to resolve"/></div>
-          </div>
-          <div class="form-grid">
-            <div class="fg"><label>Resolution Remarks</label>
-              <textarea id="off-res-remarks" placeholder="Describe the action taken…"></textarea>
-            </div>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-success" onclick="officialResolve()">✅ Mark Resolved</button>
-          </div>
-          <div id="off-res-result" style="margin-top:8px;"></div>
+      <div class="card">
+        <div class="card-title">✅ Close &amp; Resolve Complaint</div>
+        <div class="form-grid">
+          <div class="fg"><label>Ticket Number</label><input id="off-res-id" type="number" placeholder="Enter ticket number to resolve"/></div>
         </div>
+        <div class="form-grid">
+          <div class="fg"><label>Resolution Remarks</label>
+            <textarea id="off-res-remarks" placeholder="Describe the action taken…"></textarea>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-success" onclick="officialResolve()">✅ Mark Resolved</button>
+        </div>
+        <div id="off-res-result" style="margin-top:8px;"></div>
       </div>
     </div>
 
-    <!-- 7. Archive / History -->
-    <div class="section-head">🗂 7. Archive — Resolved Tickets (Your Department)</div>
+    <div class="section-head">🗂 Resolved Case Archive (Your Department)</div>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>#ID</th><th>Village</th><th>Department</th><th>Resolved At</th><th>Rating</th><th>Remarks</th></tr></thead>
         <tbody id="off-archive-tbody"></tbody>
       </table>
     </div>
-    <div class="section-head">📜 Action History Log</div>
+    <div class="section-head">📜 Departmental Activity Log</div>
     <div id="off-history-display"></div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
-     PANEL 4 — ADMIN PORTAL
+     PANEL 4 — ADMINISTRATIVE GOVERNANCE PORTAL
 ═══════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-admin" class="panel">
 
   <div id="adm-auth" class="auth-box">
-    <div class="auth-title">🛡 Admin Portal</div>
+    <div class="auth-title">🛡 Administrative Governance Portal</div>
     <div class="card">
       <div class="form-grid">
-        <div class="fg"><label>Username</label><input id="adm-uname" placeholder="Enter admin username"/></div>
-        <div class="fg"><label>Password</label><input id="adm-pass" type="password" placeholder="Enter admin password"/></div>
+        <div class="fg"><label>Username</label><input id="adm-uname" placeholder="Enter administrator username"/></div>
+        <div class="fg"><label>Password</label><input id="adm-pass" type="password" placeholder="Enter administrator password" onkeydown="if(event.key==='Enter')adminLogin()"/></div>
       </div>
       <div class="btn-row" style="margin-top:4px;">
-        <button class="btn btn-primary" onclick="adminLogin()">🔑 Login</button>
+        <button id="adm-login-btn" class="btn btn-primary" onclick="adminLogin()">🔑 Login</button>
       </div>
+      <div id="adm-lock-alert" style="margin-top:12px;"></div>
     </div>
   </div>
 
   <div id="adm-dash" style="display:none;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-      <div style="font-size:1.1rem;font-weight:700;">🛡 Admin Dashboard</div>
-      <button class="btn btn-ghost btn-sm" style="margin-left:auto;" onclick="adminLogout()">↩ Logout</button>
+    <div class="portal-topbar">
+      <div>
+        <div class="portal-user-title">🛡 Administrative Control Center</div>
+        <div class="portal-user-meta">System Governance · Personnel Roster · Operational Analytics &amp; Ledger</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span id="adm-sync-status" class="hbadge"></span>
+        <button class="btn btn-ghost btn-sm" onclick="adminLogout()">↩ Logout</button>
+      </div>
     </div>
 
-    <!-- 1. Manage officials -->
-    <div class="section-head">👥 1. Manage Official Accounts</div>
-    <div class="tbl-wrap" style="margin-bottom:12px;">
-      <table>
-        <thead><tr><th>ID</th><th>Name</th><th>Username</th><th>Department</th><th>Active</th><th>Actions</th></tr></thead>
-        <tbody id="adm-officials-tbody"></tbody>
-      </table>
-    </div>
-    <div class="card" style="max-width:580px;margin-bottom:20px;">
-      <div class="card-title">Add New Official</div>
-      <div class="form-grid">
-        <div class="fg"><label>Name</label><input id="adm-off-name" placeholder="Full name"/></div>
-        <div class="fg"><label>Username</label><input id="adm-off-uname" placeholder="username"/></div>
-      </div>
-      <div class="form-grid">
-        <div class="fg"><label>Password</label><input id="adm-off-pass" placeholder="password"/></div>
-        <div class="fg"><label>Department</label>
-          <select id="adm-off-dept"></select>
+    <nav class="adm-subnav" aria-label="Admin Section Navigation">
+      <a href="#adm-sec-officers">👥 Officers</a>
+      <a href="#adm-sec-citizens">👤 Citizens</a>
+      <a href="#adm-sec-assign">📂 Assignments</a>
+      <a href="#adm-sec-sla">⚙ SLA Controls</a>
+      <a href="#adm-sec-analytics">📊 Analytics</a>
+      <a href="#adm-sec-audit">📜 Audit Trail</a>
+      <a href="#adm-sec-queues">🗂 Live Queues</a>
+      <a href="#adm-sec-ledger">📋 Master Ledger</a>
+    </nav>
+
+    <!-- Field officer accounts -->
+    <div id="adm-sec-officers" class="section-head">👥 Field Officer Roster Management</div>
+    <div class="grid-main-side">
+      <div>
+        <div class="toolbar-row" style="margin-bottom:10px;">
+          <span id="adm-off-count" class="hbadge"></span>
+          <div class="search-box">
+            <input id="adm-off-search" type="search" placeholder="Search officer by ID, name, username, or dept…" oninput="renderAdminOfficials()"/>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ID</th><th>Name</th><th>Username</th><th>Department</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="adm-officials-tbody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="btn-row">
-        <button class="btn btn-success" onclick="adminAddOfficial()">➕ Add Official</button>
+      <div class="card">
+        <div class="card-title">Onboard New Field Officer</div>
+        <div class="form-grid">
+          <div class="fg"><label>Name</label><input id="adm-off-name" placeholder="Full name"/></div>
+          <div class="fg"><label>Username</label><input id="adm-off-uname" placeholder="Login username"/></div>
+        </div>
+        <div class="form-grid">
+          <div class="fg"><label>Password</label><input id="adm-off-pass" type="password" placeholder="Initial password"/></div>
+          <div class="fg"><label>Department</label>
+            <select id="adm-off-dept"></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-success" onclick="adminAddOfficial()">➕ Add Field Officer</button>
+        </div>
       </div>
     </div>
 
-    <!-- 2. Manage Citizen Accounts (Edit & Delete) -->
-    <div class="section-head">👤 2. Manage Citizen Accounts</div>
-    <div class="tbl-wrap" style="margin-bottom:12px;">
+    <!-- Citizen accounts -->
+    <div id="adm-sec-citizens" class="section-head">👤 Citizen Directory Management</div>
+    <div class="toolbar-row" style="margin-bottom:10px;">
+      <span id="adm-cit-count" class="hbadge"></span>
+      <div class="search-box">
+        <input id="adm-cit-search" type="search" placeholder="Search citizen by ID, name, Aadhaar, or phone…" oninput="renderAdminCitizens()"/>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-bottom:14px;">
       <table>
         <thead><tr><th>ID</th><th>Full Name</th><th>Aadhaar Number</th><th>Phone Number</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="adm-citizens-tbody"></tbody>
       </table>
     </div>
 
-    <!-- Edit Citizen Card (shown when editing) -->
-    <div id="adm-edit-cit-card" class="card" style="display:none;max-width:580px;margin-bottom:20px;border-color:var(--accent);">
+    <!-- Edit Citizen Card -->
+    <div id="adm-edit-cit-card" class="card" style="display:none;max-width:600px;margin-bottom:20px;border-color:var(--accent);animation:fadeInSoft .22s var(--ease);">
       <div class="card-title" style="color:var(--accent);">✏ Edit Citizen Profile — #<span id="edit-cit-id-title"></span></div>
       <input type="hidden" id="edit-cit-id"/>
       <div class="form-grid">
@@ -687,193 +490,256 @@ textarea{resize:vertical;min-height:70px;}
       </div>
     </div>
 
-    <!-- 3. Assign department -->
-    <div class="section-head">📂 3. Assign Department to Official</div>
-    <div class="card" style="max-width:420px;margin-bottom:20px;">
-      <div class="form-grid">
-        <div class="fg"><label>Official ID</label><input id="adm-assign-id" type="number" placeholder="Enter official ID number"/></div>
-        <div class="fg"><label>Department</label>
-          <select id="adm-assign-dept"></select>
+    <!-- Department assignment + SLA controls -->
+    <div class="grid-2">
+      <div>
+        <div id="adm-sec-assign" class="section-head" style="margin-top:8px;">📂 Department Assignment</div>
+        <div class="card">
+          <div class="form-grid">
+            <div class="fg"><label>Officer ID</label><input id="adm-assign-id" type="number" placeholder="Enter officer ID number"/></div>
+            <div class="fg"><label>Department</label>
+              <select id="adm-assign-dept"></select>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="adminAssignDept()">✅ Assign Department</button>
+          </div>
+          <div id="adm-assign-result" style="margin-top:8px;"></div>
         </div>
       </div>
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="adminAssignDept()">✅ Assign</button>
-      </div>
-      <div id="adm-assign-result" style="margin-top:8px;"></div>
-    </div>
-
-    <!-- 4. Database maintenance -->
-    <div class="section-head">🗄 4. Database Maintenance</div>
-    <div class="row" style="margin-bottom:12px;">
-      <button class="btn btn-warn" onclick="adminSimulateDay()">⏩ Simulate +1 Day (Auto-Escalation)</button>
-      <button class="btn btn-purple" onclick="adminResetDatabase()">🔄 Restore Initial Dataset</button>
-    </div>
-
-    <!-- 5. Analytics -->
-    <div class="section-head">📊 5. System Monitoring &amp; Analytics</div>
-    <div id="adm-kpi" class="kpi-grid" style="margin-bottom:16px;"></div>
-    <div class="row">
-      <div class="col" style="flex:2;min-width:300px;">
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>Department</th><th>Total</th><th>Pending</th><th>In&nbsp;Progress</th><th>Escalated</th><th>Resolved</th><th>Avg ★</th></tr></thead>
-            <tbody id="adm-dept-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="col" style="min-width:220px;">
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>Village</th><th>Total</th><th>Active</th></tr></thead>
-            <tbody id="adm-vill-tbody"></tbody>
-          </table>
+      <div>
+        <div id="adm-sec-sla" class="section-head" style="margin-top:8px;">⚙ Service Operations &amp; SLA Controls</div>
+        <div class="card">
+          <div class="card-title">Administrative System Controls</div>
+          <p style="color:var(--muted);font-size:.81rem;margin-bottom:14px;">Run scheduled escalation review across pending cases or restore baseline system records.</p>
+          <div class="btn-row" style="margin-top:0;">
+            <button class="btn btn-warn" onclick="adminSimulateDay()">⏩ Advance SLA Cycle (+1 Day Check)</button>
+            <button class="btn btn-purple" onclick="adminResetDatabase()">🔄 Reset Portal Records to Baseline</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 6. History -->
-    <div class="section-head">📜 6. Full Action History Log</div>
-    <div id="adm-history"></div>
+    <!-- Operational analytics -->
+    <div id="adm-sec-analytics" class="section-head">📊 Operational Analytics &amp; Performance</div>
+    <div id="adm-kpi" class="kpi-grid"></div>
+    <div class="grid-main-side">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Department</th><th>Total</th><th>Pending</th><th>In&nbsp;Progress</th><th>Escalated</th><th>Resolved</th><th>Avg ★</th></tr></thead>
+          <tbody id="adm-dept-tbody"></tbody>
+        </table>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Village</th><th>Total</th><th>Active</th></tr></thead>
+          <tbody id="adm-vill-tbody"></tbody>
+        </table>
+      </div>
+    </div>
 
-    <!-- 7. System Internals (Protected Admin View) -->
-    <div class="section-head">⚙ 7. System Internals — Live Data Structures</div>
-    <div class="row">
-      <div class="col" style="flex:2;min-width:300px;">
+    <!-- System-wide audit trail -->
+    <div id="adm-sec-audit" class="section-head">📜 System-Wide Audit Trail</div>
+    <div class="card" id="adm-history"></div>
+
+    <!-- Live operational registries & queues -->
+    <div id="adm-sec-queues" class="section-head">🗂 Live Operational Queues &amp; Registries</div>
+    <div class="grid-main-side">
+      <div>
         <div class="ds-block">
-          <div class="ds-tag">📋 Grievance Ledger — Sequential Record Chain</div>
+          <div class="ds-tag">📋 Active &amp; Resolved Ticket Register</div>
           <div class="ll-chain" id="ll-visual"></div>
         </div>
         <div class="ds-block">
-          <div class="ds-tag">⚡ Task Queue — Sorted by Urgency</div>
+          <div class="ds-tag">⚡ Field Dispatch Priority Queue (Urgent First)</div>
           <div id="pq-visual"></div>
         </div>
       </div>
-      <div class="col" style="min-width:260px;">
+      <div>
         <div class="ds-block">
-          <div class="ds-tag">🔍 Ticket Index — Sorted by ID</div>
+          <div class="ds-tag">🔍 Master Ticket Index (By Ticket ID)</div>
           <div id="bst-visual"></div>
         </div>
         <div class="ds-block">
-          <div class="ds-tag">📚 Activity Log — Most Recent First</div>
+          <div class="ds-tag">📚 Recent Compliance &amp; Audit Trail</div>
           <div id="stack-visual"></div>
         </div>
       </div>
     </div>
 
-    <div class="ds-block">
-      <div class="ds-tag">👥 Citizen Registry</div>
-      <div id="citizen-arr-visual" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
-    </div>
-    <div class="ds-block" style="margin-top:14px;">
-      <div class="ds-tag">🏛 Official Accounts</div>
-      <div id="official-arr-visual" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+    <div class="grid-2">
+      <div class="ds-block">
+        <div class="ds-tag">👥 Citizen Account Directory</div>
+        <div id="citizen-arr-visual" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+      </div>
+      <div class="ds-block">
+        <div class="ds-tag">🏛 Field Staff &amp; Official Directory</div>
+        <div id="official-arr-visual" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+      </div>
     </div>
 
-    <!-- 8. Plain Text Storage (*.txt) & Database Export (Protected Admin View) -->
-    <div class="section-head">💾 8. Plain Text Storage (*.txt) &amp; Database Export</div>
-    <p style="color:var(--muted);margin-bottom:18px;">
-      Authorized administrator view of live registered citizens, active grievance tickets, and local plain text storage files (<code>citizens.txt</code>, <code>grievances.txt</code>, <code>officials.txt</code>, <code>history.txt</code>).
-    </p>
-
-    <div class="row">
-      <div class="col">
-        <div class="card">
-          <div class="card-title">👥 All Registered Citizens on Website</div>
-          <div class="tbl-wrap">
-            <table>
-              <thead><tr><th>ID</th><th>Full Name</th><th>Aadhaar Number</th><th>Phone Number</th><th>Status</th></tr></thead>
-              <tbody id="export-citizens-tbody"></tbody>
-            </table>
-          </div>
+    <!-- Master grievance & folder ledger summary -->
+    <div id="adm-sec-ledger" class="section-head">📋 Master Grievance Ledger</div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+        <p style="color:var(--muted);font-size:.82rem;margin:0;">
+          Consolidated register of all active and resolved service requests persisted chronologically to the local folder archive.
+        </p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <span id="adm-ledger-count" class="hbadge"></span>
+          <span id="adm-folder-sync-note" class="hbadge"></span>
         </div>
       </div>
-    </div>
-
-    <div class="row" style="margin-top:14px;">
-      <div class="col">
-        <div class="card">
-          <div class="card-title">📋 All Grievance Tickets on Website</div>
-          <div class="tbl-wrap">
-            <table>
-              <thead><tr><th>#ID</th><th>Citizen</th><th>Village</th><th>Department</th><th>Priority</th><th>Status</th><th>Description</th></tr></thead>
-              <tbody id="export-grievances-tbody"></tbody>
-            </table>
-          </div>
-        </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#ID</th><th>Citizen</th><th>Village</th><th>Department</th><th>Priority</th><th>Status</th><th>Days</th><th>Description</th><th>Rating</th></tr></thead>
+          <tbody id="adm-master-ledger-tbody"></tbody>
+        </table>
       </div>
-    </div>
-
-    <div class="card" style="margin-top:14px;">
-      <div class="card-title">📄 Local Text Storage Files (*.txt) &amp; Exporter</div>
-      <p style="color:var(--muted);font-size:.8rem;margin-bottom:12px;">
-        Preview live contents formatted identically to the C CLI application's local <code>*.txt</code> files, or download them to synchronize:
-      </p>
-
-      <div class="filter-row" style="margin-bottom:12px;">
-        <span class="filter-chip active-chip" id="chip-txt-grievances" onclick="selectExportView('grievances')">📋 grievances.txt</span>
-        <span class="filter-chip" id="chip-txt-citizens" onclick="selectExportView('citizens')">👥 citizens.txt</span>
-        <span class="filter-chip" id="chip-txt-officials" onclick="selectExportView('officials')">🏛 officials.txt</span>
-        <span class="filter-chip" id="chip-txt-history" onclick="selectExportView('history')">📜 history.txt</span>
-        <span class="filter-chip" id="chip-txt-json" onclick="selectExportView('json')">📦 Full JSON</span>
-      </div>
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-        <button class="btn btn-primary btn-sm" onclick="copyCurrentExportView()">📋 Copy Active File</button>
-        <button class="btn btn-success btn-sm" onclick="downloadCurrentTxtFile()">📥 Download Active File</button>
-        <button class="btn btn-purple btn-sm" onclick="downloadAllTxtFiles()">📦 Download All 4 .txt Files</button>
-      </div>
-
-      <textarea id="export-file-view" style="font-family:var(--mono);font-size:.78rem;height:220px;" readonly></textarea>
     </div>
 
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
-     PANEL 5 — ROAD NETWORK
+     PANEL 5 — ROAD NETWORK & FIELD DISPATCH LOGISTICS
 ═══════════════════════════════════════════════════════════════════════════ -->
 <div id="panel-graph" class="panel">
-  <div class="section-head">🗺 Rural Road Network — Distance Matrix</div>
-  <div class="ds-block">
-    <div class="ds-tag">6 Villages × 6 Villages | Distance in km | 0 = No Direct Road</div>
-    <div class="graph-wrap" id="adj-matrix"></div>
+  <section class="village-hero" style="margin-bottom:18px;padding:16px 22px;">
+    <div class="village-hero-text">
+      <div class="village-hero-eyebrow">🚐 Block Road &amp; Field Dispatch Command</div>
+      <h2 class="village-hero-title" style="font-size:1.22rem;">Rural Road Logistics, Disruption Detours &amp; Urgent Dispatch Planner</h2>
+      <p class="village-hero-sub" style="font-size:.82rem;">
+        Plan fastest technician dispatch routes directly to active grievances, simulate monsoon/culvert road closures, compute multi-village inspection tours, and monitor corridor distances across all 6 Panchayat nodes.
+      </p>
+    </div>
+    <div id="road-kpi-strip" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"></div>
+  </section>
+
+  <!-- Live Interactive Map + Urgent Ticket Dispatch & Village Inspector -->
+  <div class="grid-main-side">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+        <div class="card-title" style="margin:0;">🗺 Interactive Gram Panchayat Road Map</div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:.71rem;color:var(--muted);">Click a village to inspect · Click a road label to toggle closure</span>
+          <button class="btn btn-ghost btn-sm" onclick="resetRoadClosures()">↺ Restore All Roads</button>
+        </div>
+      </div>
+      <div class="road-map-box">
+        <svg id="road-svg-map" viewBox="0 0 680 370" role="img" aria-label="Interactive Rural Road Network Map"></svg>
+      </div>
+      <div class="road-legend">
+        <span><i class="leg-dot" style="background:#1e5f43"></i> Block Hub / Clear</span>
+        <span><i class="leg-dot" style="background:#d97706"></i> Pending Backlog</span>
+        <span><i class="leg-dot" style="background:#dc2626"></i> Escalated / Blocked Road</span>
+        <span><i class="leg-line" style="background:#d97706"></i> Active Dispatch Route</span>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <!-- Dispatch directly to an open ticket -->
+      <div class="card">
+        <div class="card-title">🚨 Dispatch Van to Active Grievance</div>
+        <div class="fg" style="margin-bottom:10px;">
+          <label>Select Urgent / Active Service Request</label>
+          <select id="dispatch-ticket-sel" onchange="previewTicketDispatch()"></select>
+        </div>
+        <div class="form-grid" style="margin-bottom:10px;">
+          <div class="fg"><label>Dispatch Origin</label>
+            <select id="dispatch-origin-sel"></select>
+          </div>
+          <div class="fg"><label>Vehicle Speed Profile</label>
+            <select id="dispatch-speed-sel">
+              <option value="28">Utility Van (28 km/h rural avg)</option>
+              <option value="36">Emergency / Lineman Jeep (36 km/h)</option>
+              <option value="20">Heavy Repair Tractor (20 km/h)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:0;">
+          <button class="btn btn-primary btn-sm" onclick="dispatchToTicket()">🚑 Route &amp; Highlight on Map</button>
+        </div>
+        <div id="dispatch-ticket-result" style="margin-top:12px;"></div>
+      </div>
+
+      <!-- Village Node Dossier -->
+      <div class="card">
+        <div class="card-title">📍 Selected Location Field Dossier</div>
+        <div id="village-dossier"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="row" style="margin-top:20px;">
-    <div class="col" style="min-width:280px;">
-      <div class="card">
-        <div class="card-title">🧭 Shortest Route Finder</div>
-        <div class="form-grid">
-          <div class="fg"><label>From (Source)</label>
-            <select id="dijk-src"></select>
-          </div>
-          <div class="fg"><label>To (Destination)</label>
-            <select id="dijk-dst"></select>
-          </div>
+  <!-- Point-to-Point Route + Road Disruption Controls -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">🧭 Point-to-Point Route &amp; Travel Estimator</div>
+      <div class="form-grid">
+        <div class="fg"><label>Origin Hub / Village</label>
+          <select id="dijk-src"></select>
         </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="runDijkstra()">▶ Calculate Route</button>
+        <div class="fg"><label>Destination Village</label>
+          <select id="dijk-dst"></select>
         </div>
-        <div id="dijk-result" style="margin-top:14px;"></div>
       </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="runDijkstra()">▶ Calculate Shortest Route</button>
+      </div>
+      <div id="dijk-result" style="margin-top:14px;"></div>
     </div>
-    <div class="col" style="min-width:260px;">
-      <div class="card">
-        <div class="card-title">🔄 Network Connectivity Check</div>
-        <div class="form-grid">
-          <div class="fg"><label>Start Village</label>
-            <select id="bfs-src"></select>
-          </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-success" onclick="runBFS()">▶ Check Reachability</button>
-          <button class="btn btn-purple"  onclick="runDFS()">▶ Deep Scan</button>
-        </div>
-        <div id="bfs-result" style="margin-top:14px;"></div>
-      </div>
+
+    <div class="card">
+      <div class="card-title">🚧 Road Closure &amp; Monsoon Detour Simulator</div>
+      <p style="color:var(--muted);font-size:.79rem;margin-bottom:10px;">
+        Toggle damaged or waterlogged corridors below (or click roads on the map) to test detour routing and village cutoff risk:
+      </p>
+      <div id="road-closure-list" class="road-closure-grid"></div>
+      <div id="road-closure-summary" style="margin-top:10px;"></div>
     </div>
   </div>
+
+  <!-- Multi-Stop Field Tour + Flood/Connectivity Diagnostics -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">🚐 Multi-Village Inspection Tour Planner</div>
+      <p style="color:var(--muted);font-size:.79rem;margin-bottom:10px;">
+        Select target villages for today's block inspection sweep from Block HQ:
+      </p>
+      <div id="tour-village-checks" class="filter-row" style="margin-bottom:12px;"></div>
+      <div class="btn-row" style="margin-top:0;">
+        <button class="btn btn-success btn-sm" onclick="runMultiStopTour()">▶ Plan Optimal Field Tour</button>
+        <button class="btn btn-warn btn-sm" onclick="selectUrgentTourVillages()">⚠ Auto-Pick Urgent Villages</button>
+      </div>
+      <div id="tour-result" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔄 Village Road Access &amp; Emergency Reachability</div>
+      <div class="form-grid">
+        <div class="fg"><label>Starting Hub / Depot</label>
+          <select id="bfs-src"></select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-success" onclick="runBFS()">▶ Check Cutoff / Reachability</button>
+        <button class="btn btn-purple"  onclick="runDFS()">▶ Sequential Sweep Order</button>
+      </div>
+      <div id="bfs-result" style="margin-top:14px;"></div>
+    </div>
+  </div>
+
+  <!-- Live Matrix Reference -->
+  <div class="ds-block" style="max-height:none;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+      <div class="ds-tag" style="margin:0;">📏 Inter-Village Road Distance Matrix (km) — Live Reflecting Active Closures</div>
+      <span style="font-size:.73rem;color:var(--muted);">"✕" indicates temporarily closed road · "—" indicates no direct link</span>
+    </div>
+    <div class="graph-wrap" id="adj-matrix"></div>
+  </div>
 </div>
+
+</main>
 
 <!-- ═══════════════════════════ TOAST ═══════════════════════════ -->
 <div id="toast"></div>
@@ -881,1343 +747,6 @@ textarea{resize:vertical;min-height:70px;}
 <!-- ═══════════════════════════════════════════════════════════════════════════
      JAVASCRIPT — Full Application Logic
 ═══════════════════════════════════════════════════════════════════════════ -->
-<script>
-'use strict';
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   CONSTANTS (mirror rural_grievance.c)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const VILLAGES    = ["Block HQ","Rampur","Sitapur","Gopalpur","Krishnapur","Balipur"];
-const DEPARTMENTS = ["Water Supply","Electricity","Roads","Sanitation","Welfare Schemes"];
-const PRIORITY_EMERGENCY   = 10;
-const PRIORITY_NORMAL      = 5;
-const ESCALATION_THRESHOLD = 7;
-
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'admin@2024';
-
-/* Road network distance matrix (km) */
-const ROAD_GRAPH = [
-  [ 0, 5, 8, 0,12, 0],
-  [ 5, 0, 3, 7, 0, 0],
-  [ 8, 3, 0, 4, 6, 0],
-  [ 0, 7, 4, 0, 2, 9],
-  [12, 0, 6, 2, 0, 5],
-  [ 0, 0, 0, 9, 5, 0]
-];
-const INF = 1e9;
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   LOCALSTORAGE HELPERS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const LS = {
-  get: (k, d=[]) => { try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch(e){ return d; } },
-  set: (k, v)    => localStorage.setItem(k, JSON.stringify(v))
-};
-
-/* Accessors */
-const getCitizens    = () => LS.get('gms_citizens',    []);
-const getGrievances  = () => LS.get('gms_grievances',  []);
-const getOfficials   = () => LS.get('gms_officials',   []);
-const getHistory     = () => LS.get('gms_history',     []);
-const saveCitizens   = d  => LS.set('gms_citizens',    d);
-const saveGrievances = d  => LS.set('gms_grievances',  d);
-const saveOfficials  = d  => LS.set('gms_officials',   d);
-const saveHistory    = d  => LS.set('gms_history',     d);
-
-let nextTicketId   = LS.get('gms_next_ticket',   1001);
-let nextCitizenId  = LS.get('gms_next_citizen',  6);
-let nextOfficialId = LS.get('gms_next_official', 104);
-const persistIds   = () => {
-  LS.set('gms_next_ticket',   nextTicketId);
-  LS.set('gms_next_citizen',  nextCitizenId);
-  LS.set('gms_next_official', nextOfficialId);
-};
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   DEFAULT DATABASE INITIALIZER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function seedInitialData() {
-  const ts = nowTs();
-
-  const citizens = [
-    {id:1, name:"Ramesh Kumar", aadhaar:"1234-5678-9101", phone:"9876543210"},
-    {id:2, name:"Sunita Devi",  aadhaar:"2345-6789-1012", phone:"9823456780"},
-    {id:3, name:"Mohan Singh",  aadhaar:"3456-7891-0123", phone:"9712345670"},
-    {id:4, name:"Priya Sharma", aadhaar:"4567-8910-1234", phone:"9634567890"},
-    {id:5, name:"Lakshmi Bai",  aadhaar:"5678-9101-2345", phone:"9545678901"}
-  ];
-  const officials = [
-    {id:101, name:"Suresh Verma",  username:"sverma",  password:"pass101", dept:1,  active:true},
-    {id:102, name:"Anita Pandey",  username:"apandey", password:"pass102", dept:0,  active:true},
-    {id:103, name:"Rajan Tiwari",  username:"rtiwari", password:"pass103", dept:2,  active:true}
-  ];
-
-  /* Grievances: {tid, cid, vid, did, haz, desc, status, pri, days, remarks, resolved_at, rating, feedback} */
-  const seeds = [
-    {cid:1,vid:1,did:1,haz:true, desc:"High-tension live wire fallen across school road. Severe electrocution risk.",
-     status:"Escalated",   pri:10,days:9, remarks:"Sent to divisional lineman.",resolved_at:"",rating:0,feedback:""},
-    {cid:2,vid:2,did:0,haz:false,desc:"Community handpump broken. 300 families without drinking water.",
-     status:"Pending",     pri:5, days:8, remarks:"",                           resolved_at:"",rating:0,feedback:""},
-    {cid:3,vid:3,did:2,haz:true, desc:"Large pothole blocking ambulance route to PHC.",
-     status:"In Progress", pri:10,days:4, remarks:"Road crew dispatched. ETA 2 days.",resolved_at:"",rating:0,feedback:""},
-    {cid:4,vid:4,did:4,haz:false,desc:"MNREGA October wages not credited. 45 labourers affected.",
-     status:"Pending",     pri:5, days:2, remarks:"",                           resolved_at:"",rating:0,feedback:""},
-    {cid:5,vid:5,did:3,haz:false,desc:"Open drain overflowing near primary school.",
-     status:"Pending",     pri:5, days:5, remarks:"",                           resolved_at:"",rating:0,feedback:""},
-    {cid:1,vid:1,did:1,haz:false,desc:"All street lights on main bazaar non-functional.",
-     status:"Resolved",    pri:5, days:0, remarks:"Fuse replaced. All lights restored.",
-     resolved_at:ts,rating:4,feedback:"Fixed quickly, good work!"},
-    {cid:2,vid:2,did:0,haz:true, desc:"Tap water appears brown/contaminated. Children falling sick.",
-     status:"Pending",     pri:10,days:1, remarks:"",                           resolved_at:"",rating:0,feedback:""}
-  ];
-
-  const grievances = seeds.map((s, i) => ({
-    ticket_id:  1001 + i,
-    citizen_id: s.cid,
-    village_id: s.vid,
-    dept_id:    s.did,
-    is_hazard:  s.haz,
-    description:s.desc,
-    status:     s.status,
-    priority:   s.pri,
-    days_pending:s.days,
-    assigned_official_id: -1,
-    remarks:    s.remarks,
-    submitted_at: ts,
-    resolved_at:  s.resolved_at,
-    rating:     s.rating,
-    feedback:   s.feedback
-  }));
-
-  const history = grievances.map(g => ({
-    ticket_id: g.ticket_id,
-    action: g.status,
-    actor: 'System',
-    timestamp: ts
-  }));
-
-  saveCitizens(citizens);
-  saveOfficials(officials);
-  saveGrievances(grievances);
-  saveHistory(history);
-  nextTicketId   = 1008;
-  nextCitizenId  = 6;
-  nextOfficialId = 104;
-  persistIds();
-}
-
-/* Purge legacy V1 storage keys if present */
-['gms_tickets', 'gms_stack', 'gms_next_id'].forEach(k => localStorage.removeItem(k));
-
-/* Initialize default database on first load */
-if (!LS.get('gms_grievances', null) || getGrievances().length === 0) seedInitialData();
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   UTILITY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function nowTs() {
-  return new Date().toISOString().replace('T',' ').slice(0,19);
-}
-function pushHistory(tid, action, actor) {
-  const h = getHistory();
-  h.unshift({ticket_id:tid, action, actor, timestamp:nowTs()});
-  saveHistory(h.slice(0, 200));  /* cap at 200 entries */
-}
-
-/* Status badge HTML */
-function statusBadge(s) {
-  const map = {
-    'Pending':     'badge-pending',
-    'In Progress': 'badge-progress',
-    'Escalated':   'badge-escalated',
-    'Resolved':    'badge-resolved'
-  };
-  return `<span class="badge ${map[s]||'badge-pending'}">${s}</span>`;
-}
-
-/* Priority pill HTML */
-function priPill(p) {
-  return `<span class="priority-pill ${p>=10?'p10':'p5'}">${p}</span>`;
-}
-
-/* Stars HTML */
-function starsHtml(r) {
-  if (!r) return '<span style="color:var(--muted)">—</span>';
-  return `<span class="stars">${'★'.repeat(r)}${'☆'.repeat(5-r)}</span>`;
-}
-
-/* Toast notification */
-function toast(msg, type='success') {
-  const el = document.getElementById('toast');
-  const cfg = {
-    success: ['#1a3626','#7ee787','#238636'],
-    error:   ['#3c1618','#ff7b72','#da3633'],
-    warn:    ['#2f2217','#e3b341','#9e6a03'],
-    info:    ['#132337','#79c0ff','#1f6feb']
-  }[type] || ['#1a3626','#7ee787','#238636'];
-  el.style.background = cfg[0];
-  el.style.color      = cfg[1];
-  el.style.border     = `1px solid ${cfg[2]}`;
-  el.textContent      = msg;
-  el.style.display    = 'block';
-  setTimeout(() => el.style.display='none', 3400);
-}
-
-/* Populate <select> with villages */
-function populateVillageSelect(id, skipZero=true) {
-  const sel = document.getElementById(id);
-  if (!sel) return;
-  sel.innerHTML = '';
-  VILLAGES.forEach((v, i) => {
-    if (skipZero && i===0) return;
-    sel.innerHTML += `<option value="${i}">${v}</option>`;
-  });
-}
-
-/* Populate <select> with departments */
-function populateDeptSelect(id, withAll=false) {
-  const sel = document.getElementById(id);
-  if (!sel) return;
-  sel.innerHTML = '';
-  if (withAll) sel.innerHTML = '<option value="-1">All Departments</option>';
-  DEPARTMENTS.forEach((d, i) => {
-    sel.innerHTML += `<option value="${i}">${d}</option>`;
-  });
-}
-
-/* Alert HTML helpers */
-const alertHtml = (msg, type='info') => `<div class="alert alert-${type}">${msg}</div>`;
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   TAB SWITCHING
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const TAB_IDS = ['overview','citizen','official','admin','graph'];
-function switchTab(id) {
-  document.querySelectorAll('.tab-btn').forEach((t,i) => {
-    t.classList.toggle('active', TAB_IDS[i]===id);
-  });
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  if (id==='overview') renderOverview();
-  if (id==='graph')    renderGraph();
-  if (id==='admin' && currentAdmin) renderAdminDash();
-  if (id==='official' && currentOfficial) renderOfficialDash();
-  if (id==='citizen'  && currentCitizen)  renderMyGrievances();
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SECTION 1 — OVERVIEW
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-let ledgerFilter = 'all';
-
-function renderOverview() {
-  const G = getGrievances();
-  const C = getCitizens();
-
-  /* KPIs */
-  const total = G.length;
-  const pend  = G.filter(g=>g.status==='Pending').length;
-  const inp   = G.filter(g=>g.status==='In Progress').length;
-  const esc   = G.filter(g=>g.status==='Escalated').length;
-  const res   = G.filter(g=>g.status==='Resolved').length;
-
-  document.getElementById('kpi-row').innerHTML = [
-    kpi('Total Tickets',  total,     'blue'),
-    kpi('Pending',        pend,      'yellow'),
-    kpi('In Progress',    inp,       'purple'),
-    kpi('Escalated 🚨',  esc,       'red'),
-    kpi('Resolved ✅',   res,       'green'),
-    kpi('Citizens',       C.length,  'blue')
-  ].join('');
-
-  /* Dept analytics (Array counters) */
-  const dT=[0,0,0,0,0],dP=[0,0,0,0,0],dI=[0,0,0,0,0],
-        dE=[0,0,0,0,0],dR=[0,0,0,0,0],dRat=[0,0,0,0,0],dRc=[0,0,0,0,0];
-  const vT=Array(6).fill(0), vA=Array(6).fill(0);
-
-  G.forEach(g => {
-    const d=g.dept_id, v=g.village_id;
-    dT[d]++; vT[v]++;
-    if (g.status==='Pending')     { dP[d]++; vA[v]++; }
-    else if (g.status==='In Progress') { dI[d]++; vA[v]++; }
-    else if (g.status==='Escalated')   { dE[d]++; vA[v]++; }
-    else if (g.status==='Resolved')    {
-      dR[d]++;
-      if (g.rating>0){ dRat[d]+=g.rating; dRc[d]++; }
-    }
-  });
-
-  document.getElementById('dept-tbody').innerHTML =
-    DEPARTMENTS.map((dep,i) => {
-      const avg = dRc[i]>0 ? (dRat[i]/dRc[i]).toFixed(1)+'/5' : '—';
-      return `<tr>
-        <td><span class="dept-chip">${dep}</span></td>
-        <td>${dT[i]}</td><td>${dP[i]}</td><td>${dI[i]}</td>
-        <td>${dE[i]>0?`<span style="color:var(--red)">${dE[i]}</span>`:0}</td>
-        <td>${dR[i]}</td><td>${avg}</td>
-      </tr>`;
-    }).join('');
-
-  document.getElementById('village-tbody').innerHTML =
-    VILLAGES.map((v,i) => `<tr>
-      <td><span class="village-chip">${v}</span></td>
-      <td>${vT[i]}</td>
-      <td>${vA[i]>0?`<span style="color:var(--orange)">${vA[i]}</span>`:0}</td>
-    </tr>`).join('');
-
-  /* Filter chips */
-  const statuses = ['all','Pending','In Progress','Escalated','Resolved'];
-  document.getElementById('ledger-filters').innerHTML = statuses.map(s =>
-    `<span class="filter-chip ${ledgerFilter===s?'active-chip':''}"
-           onclick="ledgerFilter='${s}';renderOverview()">
-       ${s==='all'?'All':s} ${s==='all'?`(${G.length})`:
-         `(${G.filter(g=>g.status===s).length})`}
-     </span>`
-  ).join('');
-
-  /* Ledger table */
-  const filtered = ledgerFilter==='all' ? G : G.filter(g=>g.status===ledgerFilter);
-  const C_map = {};
-  getCitizens().forEach(c => C_map[c.id]=c.name);
-  document.getElementById('ledger-tbody').innerHTML = [...filtered].reverse().map(g => `<tr>
-    <td><strong>#${g.ticket_id}</strong></td>
-    <td style="font-size:.78rem">${C_map[g.citizen_id]||g.citizen_id}</td>
-    <td><span class="village-chip">${VILLAGES[g.village_id]}</span></td>
-    <td><span class="dept-chip">${DEPARTMENTS[g.dept_id]}</span></td>
-    <td>${priPill(g.priority)}</td>
-    <td>${g.days_pending}</td>
-    <td>${g.is_hazard?'<span style="color:var(--red)">⚠ YES</span>':'No'}</td>
-    <td>${statusBadge(g.status)}</td>
-    <td style="font-size:.72rem;color:var(--muted)">${g.submitted_at||'—'}</td>
-  </tr>`).join('') || '<tr><td colspan="9" style="color:var(--muted);text-align:center">No records</td></tr>';
-}
-
-function kpi(label, val, col) {
-  return `<div class="kpi"><div class="kpi-label">${label}</div>
-    <div class="kpi-value ${col}">${val}</div></div>`;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SECTION 2 — CITIZEN PORTAL
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-let currentCitizen = null;
-let feedbackTargetId = null;
-
-function showCitLogin()   { document.getElementById('cit-auth-mode').style.display='none'; document.getElementById('cit-login-form').style.display='block'; document.getElementById('cit-register-form').style.display='none'; }
-function showCitRegister(){ document.getElementById('cit-auth-mode').style.display='none'; document.getElementById('cit-register-form').style.display='block'; document.getElementById('cit-login-form').style.display='none'; }
-function showCitAuthMode(){ document.getElementById('cit-auth-mode').style.display='block'; document.getElementById('cit-login-form').style.display='none'; document.getElementById('cit-register-form').style.display='none'; }
-
-function citizenRegister() {
-  const name    = document.getElementById('reg-name').value.trim();
-  const aadhaar = document.getElementById('reg-aadhaar').value.trim();
-  const phone   = document.getElementById('reg-phone').value.trim();
-  if (!name||!aadhaar||!phone) { toast('Fill all fields','error'); return; }
-
-  const citizens = getCitizens();
-  if (citizens.find(c=>c.aadhaar===aadhaar)) {
-    toast('Aadhaar already registered — please login','error'); return;
-  }
-  const id = nextCitizenId++;
-  citizens.push({id, name, aadhaar, phone});
-  saveCitizens(citizens);
-  persistIds();
-  toast(`Registered! Welcome, ${name}. Please login now.`);
-  showCitAuthMode();
-}
-
-function citizenLogin() {
-  const aadhaar = document.getElementById('cit-aadhaar').value.trim();
-  const phone   = document.getElementById('cit-phone').value.trim();
-  const c = getCitizens().find(x => x.aadhaar===aadhaar && x.phone===phone);
-  if (!c) { toast('Invalid Aadhaar or Phone number','error'); return; }
-  if (c.active === false) { toast('This citizen account has been deactivated. Please contact Admin.','error'); return; }
-  currentCitizen = c;
-  document.getElementById('cit-auth').style.display='none';
-  document.getElementById('cit-dash').style.display='block';
-  document.getElementById('cit-welcome').textContent = `👤 Welcome, ${c.name}`;
-  document.getElementById('cit-info').textContent = `Aadhaar: ${c.aadhaar} · Phone: ${c.phone}`;
-  /* Populate selects */
-  populateVillageSelect('grv-village');
-  populateDeptSelect('grv-dept');
-  renderMyGrievances();
-  toast(`Welcome back, ${c.name}!`);
-}
-
-function citizenLogout() {
-  currentCitizen = null;
-  feedbackTargetId = null;
-  document.getElementById('cit-auth').style.display='block';
-  document.getElementById('cit-dash').style.display='none';
-  showCitAuthMode();
-  document.getElementById('submit-receipt').innerHTML='';
-  document.getElementById('submit-alert').innerHTML='';
-  document.getElementById('track-result').innerHTML='';
-  document.getElementById('reopen-result').innerHTML='';
-  document.getElementById('feedback-panel').style.display='none';
-  toast('Logged out','info');
-}
-
-/* ── 1. Submit Grievance — with STRICT DUPLICATE REJECTION ── */
-function citizenSubmit() {
-  if (!currentCitizen) return;
-  const vid   = parseInt(document.getElementById('grv-village').value);
-  const did   = parseInt(document.getElementById('grv-dept').value);
-  const desc  = document.getElementById('grv-desc').value.trim();
-  const haz   = parseInt(document.getElementById('grv-hazard').value)===1;
-
-  if (!desc) { toast('Description is required','error'); return; }
-
-  const G = getGrievances();
-
-  /* ── DUPLICATE REJECTION (mirrors ll_duplicate_check in C) ──
-     Same village_id + dept_id with status != "Resolved" → REJECT */
-  const dup = G.find(g =>
-    g.village_id===vid && g.dept_id===did && g.status!=='Resolved'
-  );
-  if (dup) {
-    document.getElementById('submit-alert').innerHTML = `
-      <div class="alert alert-danger">
-        <strong>⛔ DUPLICATE SUBMISSION REJECTED</strong><br>
-        An unresolved complaint for <strong>${DEPARTMENTS[did]}</strong>
-        in <strong>${VILLAGES[vid]}</strong> already exists.<br>
-        <strong>Existing Ticket ID: #${dup.ticket_id}</strong><br>
-        Please track that ticket or wait for it to be resolved before submitting a new one.
-      </div>`;
-    document.getElementById('submit-receipt').innerHTML='';
-    return;
-  }
-  document.getElementById('submit-alert').innerHTML='';
-
-  const tid  = nextTicketId++;
-  const pri  = haz ? PRIORITY_EMERGENCY : PRIORITY_NORMAL;
-  const ts   = nowTs();
-
-  G.push({
-    ticket_id:  tid,
-    citizen_id: currentCitizen.id,
-    village_id: vid,
-    dept_id:    did,
-    is_hazard:  haz,
-    description:desc,
-    status:     'Pending',
-    priority:   pri,
-    days_pending:0,
-    assigned_official_id:-1,
-    remarks:    '',
-    submitted_at:ts,
-    resolved_at: '',
-    rating:     0,
-    feedback:   ''
-  });
-  saveGrievances(G);
-  persistIds();
-  pushHistory(tid, 'Submitted', currentCitizen.name);
-
-  document.getElementById('submit-receipt').innerHTML = `
-    <div class="receipt">
-      <div>╔══════════════════════════════════════════════╗</div>
-      <div>║  GRIEVANCE SUBMITTED — RECEIPT               ║</div>
-      <div>╚══════════════════════════════════════════════╝</div>
-      <div><span class="r-label">Ticket ID     : </span>#${tid}</div>
-      <div><span class="r-label">Category      : </span>${DEPARTMENTS[did]}</div>
-      <div><span class="r-label">Village       : </span>${VILLAGES[vid]}</div>
-      <div><span class="r-label">Priority      : </span>${pri} (${haz?'EMERGENCY':'Normal'})</div>
-      <div><span class="r-label">Status        : </span>Pending</div>
-      <div><span class="r-label">Submitted At  : </span>${ts}</div>
-    </div>`;
-  document.getElementById('grv-desc').value='';
-  renderMyGrievances();
-  toast(`Ticket #${tid} submitted!`);
-}
-
-/* ── 2. Track Grievance ── */
-function citizenTrack() {
-  const tid = parseInt(document.getElementById('track-id').value);
-  const g = getGrievances().find(x => x.ticket_id===tid);
-  const el = document.getElementById('track-result');
-  if (!g) { el.innerHTML = alertHtml(`Ticket #${tid} not found.`,'danger'); return; }
-  el.innerHTML = `
-    <div class="alert alert-info">
-      <strong>#${g.ticket_id}</strong> · ${DEPARTMENTS[g.dept_id]} · ${VILLAGES[g.village_id]}<br>
-      Priority: ${g.priority} · Days: ${g.days_pending}<br>
-      ${statusBadge(g.status)}<br>
-      <small style="color:var(--muted)">${g.description}</small>
-      ${g.remarks?`<br><small>Remarks: ${g.remarks}</small>`:''}
-    </div>`;
-}
-
-/* ── 3. My Grievances ── */
-function renderMyGrievances() {
-  if (!currentCitizen) return;
-  const G = getGrievances().filter(g => g.citizen_id===currentCitizen.id);
-  document.getElementById('my-grievances-tbody').innerHTML =
-    G.length ? G.map(g => `<tr>
-      <td><strong>#${g.ticket_id}</strong></td>
-      <td><span class="village-chip">${VILLAGES[g.village_id]}</span></td>
-      <td><span class="dept-chip">${DEPARTMENTS[g.dept_id]}</span></td>
-      <td>${priPill(g.priority)}</td>
-      <td>${g.days_pending}</td>
-      <td>${statusBadge(g.status)}</td>
-      <td>${
-        g.status==='Resolved' && g.rating===0
-          ? `<button class="btn btn-warn btn-sm" onclick="showFeedbackPanel(${g.ticket_id})">⭐ Rate</button>`
-          : g.rating>0 ? starsHtml(g.rating) : '—'
-      }</td>
-    </tr>`).join('')
-    : '<tr><td colspan="7" style="color:var(--muted);text-align:center">No grievances on record</td></tr>';
-}
-
-/* ── 4. Reopen Resolved Grievance ── */
-function citizenReopen() {
-  if (!currentCitizen) return;
-  const tid = parseInt(document.getElementById('reopen-id').value);
-  const el  = document.getElementById('reopen-result');
-  const G   = getGrievances();
-  const g   = G.find(x => x.ticket_id===tid);
-
-  if (!g) { el.innerHTML=alertHtml(`Ticket #${tid} not found.`,'danger'); return; }
-  if (g.citizen_id!==currentCitizen.id) { el.innerHTML=alertHtml('You can only reopen your own tickets.','danger'); return; }
-  if (g.status!=='Resolved') { el.innerHTML=alertHtml(`Ticket is not resolved — current status: ${g.status}`,'warn'); return; }
-
-  /* Apply reopen logic (mirrors citizen_reopen in C) */
-  g.status       = 'Pending';
-  g.priority     = g.is_hazard ? PRIORITY_EMERGENCY : PRIORITY_NORMAL;
-  g.days_pending = 0;
-  g.rating       = 0;
-  g.feedback     = '';
-  g.resolved_at  = '';
-  saveGrievances(G);
-  pushHistory(tid, 'Reopened by Citizen', currentCitizen.name);
-
-  el.innerHTML = alertHtml(`✅ Ticket #${tid} reopened. Status reset to Pending with priority ${g.priority}.`,'success');
-  renderMyGrievances();
-  toast(`Ticket #${tid} reopened`,'warn');
-}
-
-/* ── 5. Feedback ── */
-function showFeedbackPanel(tid) {
-  feedbackTargetId = tid;
-  document.getElementById('fb-tid').textContent = tid;
-  document.getElementById('fb-rating').value='5';
-  document.getElementById('fb-comment').value='';
-  document.getElementById('feedback-panel').style.display='block';
-  document.getElementById('feedback-panel').scrollIntoView({behavior:'smooth'});
-}
-
-function submitFeedback() {
-  if (!currentCitizen||!feedbackTargetId) return;
-  const G = getGrievances();
-  const g = G.find(x=>x.ticket_id===feedbackTargetId);
-  if (!g) return;
-  if (g.rating>0) { toast('Already rated','error'); return; }
-  g.rating   = parseInt(document.getElementById('fb-rating').value);
-  g.feedback = document.getElementById('fb-comment').value.trim();
-  saveGrievances(G);
-  pushHistory(feedbackTargetId,'Feedback Submitted',currentCitizen.name);
-  document.getElementById('feedback-panel').style.display='none';
-  feedbackTargetId=null;
-  renderMyGrievances();
-  toast('Feedback recorded — thank you!');
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SECTION 3 — OFFICIAL PORTAL
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-let currentOfficial = null;
-
-function officialLogin() {
-  const uname = document.getElementById('off-uname').value.trim();
-  const pass  = document.getElementById('off-pass').value.trim();
-  const off   = getOfficials().find(o => o.username===uname && o.password===pass && o.active);
-  if (!off) { toast('Invalid credentials','error'); return; }
-  currentOfficial = off;
-  document.getElementById('off-auth').style.display='none';
-  document.getElementById('off-dash').style.display='block';
-  document.getElementById('off-welcome').textContent=`🔧 Welcome, ${off.name}`;
-  const deptStr = off.dept===-1||off.dept===undefined ? 'All Departments' : DEPARTMENTS[off.dept];
-  document.getElementById('off-dept-info').textContent=`Department: ${deptStr}`;
-  renderOfficialDash();
-  toast(`Welcome, ${off.name}!`);
-}
-
-function officialLogout() {
-  currentOfficial=null;
-  document.getElementById('off-auth').style.display='block';
-  document.getElementById('off-dash').style.display='none';
-  toast('Logged out','info');
-}
-
-function deptMatch(g) {
-  if (!currentOfficial) return false;
-  return currentOfficial.dept===-1 || currentOfficial.dept===undefined || g.dept_id===currentOfficial.dept;
-}
-
-function renderOfficialDash() {
-  if (!currentOfficial) return;
-  const G = getGrievances();
-
-  /* Task queue display (sorted by urgency, non-resolved) */
-  const active = G.filter(g => g.status!=='Resolved' && deptMatch(g))
-    .sort((a,b) => b.priority-a.priority || b.days_pending-a.days_pending);
-
-  document.getElementById('off-pq-display').innerHTML = active.length
-    ? active.map((g,i) => `
-        <div class="pq-item ${g.status==='Escalated'?'pq-escalated':''}">
-          <div class="pq-rank">#${i+1}</div>
-          <div class="pq-info">
-            <div class="pq-ticket">#${g.ticket_id} — ${DEPARTMENTS[g.dept_id]}</div>
-            <div class="pq-sub">
-              ${VILLAGES[g.village_id]} · Day ${g.days_pending}
-              ${g.is_hazard?'· <span style="color:var(--red)">⚠ Hazard</span>':''}
-              ${g.remarks?`· <em>${g.remarks.slice(0,45)}…</em>`:''}
-            </div>
-          </div>
-          ${priPill(g.priority)} ${statusBadge(g.status)}
-        </div>`)
-      .join('')
-    : '<p style="color:var(--muted)">No active tickets in your department.</p>';
-
-  /* Archive */
-  const resolved = G.filter(g => g.status==='Resolved' && deptMatch(g));
-  document.getElementById('off-archive-tbody').innerHTML = resolved.length
-    ? resolved.map(g=>`<tr>
-        <td><strong>#${g.ticket_id}</strong></td>
-        <td>${VILLAGES[g.village_id]}</td>
-        <td>${DEPARTMENTS[g.dept_id]}</td>
-        <td style="font-size:.78rem">${g.resolved_at||'—'}</td>
-        <td>${starsHtml(g.rating)}</td>
-        <td style="font-size:.78rem">${g.remarks||'—'}</td>
-      </tr>`).join('')
-    : '<tr><td colspan="6" style="color:var(--muted);text-align:center">No resolved tickets yet</td></tr>';
-
-  renderHistoryDisplay('off-history-display', 20);
-}
-
-/* ── 3. View ticket details ── */
-function officialViewDetails() {
-  const tid = parseInt(document.getElementById('off-view-id').value);
-  const el  = document.getElementById('off-detail-result');
-  const g   = getGrievances().find(x=>x.ticket_id===tid);
-  if (!g) { el.innerHTML=alertHtml('Ticket not found','danger'); return; }
-  const C = getCitizens().find(c=>c.id===g.citizen_id);
-  el.innerHTML = `<div class="alert alert-info" style="font-size:.8rem;line-height:1.9;">
-    <strong>#${g.ticket_id}</strong> ${statusBadge(g.status)}<br>
-    Village: ${VILLAGES[g.village_id]} · Dept: ${DEPARTMENTS[g.dept_id]}<br>
-    Priority: ${g.priority} · Days: ${g.days_pending} · Hazard: ${g.is_hazard?'YES':'No'}<br>
-    ${C?`Citizen: ${C.name} · ${C.phone}<br>`:''}
-    <em>${g.description}</em>
-    ${g.remarks?`<br>Remarks: ${g.remarks}`:''}
-    ${g.rating?`<br>Citizen Rating: ${starsHtml(g.rating)} — ${g.feedback}`:''}
-  </div>`;
-}
-
-/* ── 4. Update status ── */
-function officialUpdateStatus() {
-  const tid     = parseInt(document.getElementById('off-upd-id').value);
-  const newStat = document.getElementById('off-upd-status').value;
-  const remarks = document.getElementById('off-upd-remarks').value.trim();
-  const el      = document.getElementById('off-upd-result');
-
-  const G = getGrievances();
-  const g = G.find(x=>x.ticket_id===tid);
-  if (!g) { el.innerHTML=alertHtml('Ticket not found','danger'); return; }
-  if (g.status==='Resolved') { el.innerHTML=alertHtml('Ticket is already resolved','warn'); return; }
-  if (!deptMatch(g)) { el.innerHTML=alertHtml('Ticket not in your department','danger'); return; }
-
-  g.status = newStat;
-  if (newStat==='Escalated') g.priority = PRIORITY_EMERGENCY;
-  if (remarks) g.remarks = remarks;
-  saveGrievances(G);
-  pushHistory(tid, newStat, currentOfficial.name);
-  el.innerHTML = alertHtml(`✅ Ticket #${tid} updated → ${newStat}`,'success');
-  renderOfficialDash();
-  toast(`Status updated to ${newStat}`);
-}
-
-/* ── 5. Escalate ── */
-function officialEscalate() {
-  const tid = parseInt(document.getElementById('off-esc-id').value);
-  const el  = document.getElementById('off-esc-result');
-  const G   = getGrievances();
-  const g   = G.find(x=>x.ticket_id===tid);
-  if (!g) { el.innerHTML=alertHtml('Ticket not found','danger'); return; }
-  if (g.status==='Resolved') { el.innerHTML=alertHtml('Cannot escalate resolved ticket','warn'); return; }
-  if (!deptMatch(g)) { el.innerHTML=alertHtml('Not in your department','danger'); return; }
-  g.status   = 'Escalated';
-  g.priority = PRIORITY_EMERGENCY;
-  saveGrievances(G);
-  pushHistory(tid,'Escalated by Official',currentOfficial.name);
-  el.innerHTML=alertHtml(`🚨 Ticket #${tid} escalated to Priority 10`,'warn');
-  renderOfficialDash();
-  toast(`Ticket #${tid} escalated`,'warn');
-}
-
-/* ── 6. Mark Resolved ── */
-function officialResolve() {
-  const tid     = parseInt(document.getElementById('off-res-id').value);
-  const remarks = document.getElementById('off-res-remarks').value.trim();
-  const el      = document.getElementById('off-res-result');
-  const G       = getGrievances();
-  const g       = G.find(x=>x.ticket_id===tid);
-  if (!g) { el.innerHTML=alertHtml('Ticket not found','danger'); return; }
-  if (g.status==='Resolved') { el.innerHTML=alertHtml('Already resolved','warn'); return; }
-  if (!deptMatch(g)) { el.innerHTML=alertHtml('Not in your department','danger'); return; }
-  g.status      = 'Resolved';
-  g.days_pending= 0;
-  g.resolved_at = nowTs();
-  if (remarks) g.remarks = remarks;
-  saveGrievances(G);
-  pushHistory(tid,'Resolved',currentOfficial.name);
-  el.innerHTML=alertHtml(`✅ Ticket #${tid} marked Resolved. Citizen can now leave feedback.`,'success');
-  renderOfficialDash();
-  document.getElementById('off-res-remarks').value='';
-  toast(`Ticket #${tid} resolved!`);
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SECTION 4 — ADMIN PORTAL
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-let currentAdmin = false;
-
-function adminLogin() {
-  const u = document.getElementById('adm-uname').value.trim();
-  const p = document.getElementById('adm-pass').value.trim();
-  if (u!==ADMIN_USER||p!==ADMIN_PASS) { toast('Wrong admin credentials','error'); return; }
-  currentAdmin=true;
-  document.getElementById('adm-auth').style.display='none';
-  document.getElementById('adm-dash').style.display='block';
-  populateDeptSelect('adm-off-dept', true);
-  populateDeptSelect('adm-assign-dept', true);
-  renderAdminDash();
-  toast('Admin access granted');
-}
-
-function adminLogout() {
-  currentAdmin=false;
-  document.getElementById('adm-auth').style.display='block';
-  document.getElementById('adm-dash').style.display='none';
-  toast('Admin logged out','info');
-}
-
-function renderAdminDash() {
-  if (!currentAdmin) return;
-  renderAdminOfficials();
-  renderAdminCitizens();
-  renderAdminAnalytics();
-  renderHistoryDisplay('adm-history', 50);
-  renderDS();
-  renderExportPanel();
-}
-
-function renderAdminCitizens() {
-  const C = getCitizens();
-  const el = document.getElementById('adm-citizens-tbody');
-  if (!el) return;
-  el.innerHTML = C.map(c => {
-    const isActive = c.active !== false;
-    return `<tr>
-      <td><strong>${c.id}</strong></td>
-      <td>${c.name}</td>
-      <td><span style="font-family:var(--mono);font-size:.78rem">${c.aadhaar}</span></td>
-      <td>${c.phone}</td>
-      <td>${isActive ? '<span style="color:var(--green)">✓ Active</span>' : '<span style="color:var(--red)">Deactivated</span>'}</td>
-      <td style="white-space:nowrap;">
-        <button class="btn btn-primary btn-sm" style="padding:3px 8px;font-size:.72rem;" onclick="adminOpenEditCitizen(${c.id})">✏ Edit</button>
-        <button class="btn btn-ghost btn-sm" style="padding:3px 8px;font-size:.72rem;" onclick="adminToggleCitizen(${c.id})">
-          ${isActive ? 'Deactivate' : 'Activate'}
-        </button>
-        <button class="btn btn-danger btn-sm" style="padding:3px 8px;font-size:.72rem;" onclick="adminDeleteCitizen(${c.id})">🗑 Delete</button>
-      </td>
-    </tr>`;
-  }).join('') || '<tr><td colspan="6" style="color:var(--muted)">No registered citizens</td></tr>';
-}
-
-function adminOpenEditCitizen(id) {
-  const c = getCitizens().find(x => x.id === id);
-  if (!c) return;
-  document.getElementById('edit-cit-id').value = c.id;
-  document.getElementById('edit-cit-id-title').textContent = c.id;
-  document.getElementById('edit-cit-name').value = c.name;
-  document.getElementById('edit-cit-phone').value = c.phone;
-  document.getElementById('edit-cit-aadhaar').value = c.aadhaar;
-  document.getElementById('adm-edit-cit-card').style.display = 'block';
-  document.getElementById('adm-edit-cit-card').scrollIntoView({ behavior: 'smooth' });
-}
-
-function adminCancelCitizenEdit() {
-  document.getElementById('adm-edit-cit-card').style.display = 'none';
-}
-
-function adminSaveCitizenEdit() {
-  const id = parseInt(document.getElementById('edit-cit-id').value);
-  const name = document.getElementById('edit-cit-name').value.trim();
-  const phone = document.getElementById('edit-cit-phone').value.trim();
-  const aadhaar = document.getElementById('edit-cit-aadhaar').value.trim();
-
-  if (!name || !phone || !aadhaar) { toast('Please fill in all fields', 'error'); return; }
-
-  const C = getCitizens();
-  const dup = C.find(x => x.id !== id && x.aadhaar === aadhaar);
-  if (dup) { toast('Aadhaar already registered by another citizen', 'error'); return; }
-
-  const c = C.find(x => x.id === id);
-  if (!c) return;
-  c.name = name;
-  c.phone = phone;
-  c.aadhaar = aadhaar;
-
-  saveCitizens(C);
-  pushHistory(id, `Citizen Profile #${id} Updated by Admin`, 'Admin');
-  adminCancelCitizenEdit();
-  renderAdminDash();
-  renderOverview();
-  toast(`Citizen #${id} (${name}) profile updated!`);
-}
-
-function adminToggleCitizen(id) {
-  const C = getCitizens();
-  const c = C.find(x => x.id === id);
-  if (!c) return;
-  c.active = (c.active === false) ? true : false;
-  saveCitizens(C);
-  pushHistory(id, `Citizen #${id} ${c.active ? 'Reactivated' : 'Deactivated'} by Admin`, 'Admin');
-  renderAdminDash();
-  toast(`Citizen #${id} ${c.active ? 'reactivated' : 'deactivated'}`);
-}
-
-function adminDeleteCitizen(id) {
-  const C = getCitizens();
-  const c = C.find(x => x.id === id);
-  if (!c) return;
-  if (!confirm(`Permanently delete citizen #${id} (${c.name})?\n\nNote: Deactivating is safer to preserve historical records. Click OK to permanently delete.`)) return;
-
-  const filtered = C.filter(x => x.id !== id);
-  saveCitizens(filtered);
-  pushHistory(id, `Citizen #${id} Permanently Deleted by Admin`, 'Admin');
-  adminCancelCitizenEdit();
-  renderAdminDash();
-  renderOverview();
-  toast(`Citizen #${id} deleted permanently`, 'warn');
-}
-
-function renderAdminOfficials() {
-  const O = getOfficials();
-  document.getElementById('adm-officials-tbody').innerHTML = O.map(o=>`<tr>
-    <td>${o.id}</td>
-    <td>${o.name}</td>
-    <td><span style="font-family:var(--mono);font-size:.78rem">${o.username}</span></td>
-    <td>${o.dept===-1||o.dept===undefined?'<span style="color:var(--muted)">All</span>':`<span class="dept-chip">${DEPARTMENTS[o.dept]}</span>`}</td>
-    <td>${o.active?'<span style="color:var(--green)">✓ Active</span>':'<span style="color:var(--red)">Inactive</span>'}</td>
-    <td>
-      <button class="btn btn-ghost btn-sm" onclick="adminToggleOfficial(${o.id})">
-        ${o.active?'Deactivate':'Activate'}
-      </button>
-    </td>
-  </tr>`).join('') || '<tr><td colspan="6" style="color:var(--muted)">No officials</td></tr>';
-}
-
-function adminAddOfficial() {
-  const name  = document.getElementById('adm-off-name').value.trim();
-  const uname = document.getElementById('adm-off-uname').value.trim();
-  const pass  = document.getElementById('adm-off-pass').value.trim();
-  const dept  = parseInt(document.getElementById('adm-off-dept').value);
-  if (!name||!uname||!pass) { toast('Fill all fields','error'); return; }
-
-  const O = getOfficials();
-  if (O.find(o=>o.username===uname)) { toast('Username already taken','error'); return; }
-  const id = nextOfficialId++;
-  O.push({id, name, username:uname, password:pass, dept: isNaN(dept)?-1:dept, active:true});
-  saveOfficials(O);
-  persistIds();
-  renderAdminDash();
-  ['adm-off-name','adm-off-uname','adm-off-pass'].forEach(i=>document.getElementById(i).value='');
-  toast(`Official ${name} (ID:${id}) added`);
-}
-
-function adminToggleOfficial(id) {
-  const O = getOfficials();
-  const o = O.find(x=>x.id===id);
-  if (o) { o.active=!o.active; saveOfficials(O); renderAdminDash(); toast(`Official ${o.name} ${o.active?'activated':'deactivated'}`); }
-}
-
-function adminAssignDept() {
-  const id   = parseInt(document.getElementById('adm-assign-id').value);
-  const dept = parseInt(document.getElementById('adm-assign-dept').value);
-  const O    = getOfficials();
-  const o    = O.find(x=>x.id===id&&x.active);
-  const el   = document.getElementById('adm-assign-result');
-  if (!o) { el.innerHTML=alertHtml('Official not found','danger'); return; }
-  o.dept = isNaN(dept)?-1:dept;
-  saveOfficials(O);
-  el.innerHTML=alertHtml(`✅ ${o.name} assigned to ${o.dept===-1?'All Departments':DEPARTMENTS[o.dept]}`,'success');
-  renderAdminDash();
-  /* sync currentOfficial if logged in */
-  if (currentOfficial&&currentOfficial.id===id) currentOfficial.dept=o.dept;
-}
-
-function adminSimulateDay() {
-  const G = getGrievances();
-  let newEsc = 0;
-  G.forEach(g => {
-    if (g.status!=='Resolved') {
-      g.days_pending++;
-      if (g.days_pending>=ESCALATION_THRESHOLD && g.status!=='Escalated') {
-        g.status   = 'Escalated';
-        g.priority = PRIORITY_EMERGENCY;
-        pushHistory(g.ticket_id,`Auto-Escalated (Day ${g.days_pending})`,'System');
-        newEsc++;
-      }
-    }
-  });
-  saveGrievances(G);
-  renderAdminDash();
-  renderOverview();
-  toast(`+1 Day simulated. New auto-escalations: ${newEsc}`, newEsc>0?'warn':'success');
-}
-
-function adminResetDatabase() {
-  if (!confirm('Reset ALL data and restore initial dataset? This cannot be undone.')) return;
-  /* Clear localStorage keys */
-  ['gms_citizens','gms_grievances','gms_officials','gms_history',
-   'gms_next_ticket','gms_next_citizen','gms_next_official'].forEach(k=>localStorage.removeItem(k));
-  nextTicketId=1001; nextCitizenId=6; nextOfficialId=104;
-  seedInitialData();
-  /* Reset IDs */
-  nextTicketId=LS.get('gms_next_ticket',1001);
-  nextCitizenId=LS.get('gms_next_citizen',6);
-  nextOfficialId=LS.get('gms_next_official',104);
-  renderAdminDash();
-  renderOverview();
-  toast('Initial dataset restored!');
-}
-
-function renderAdminAnalytics() {
-  const G = getGrievances();
-  const total=G.length,
-        pend=G.filter(g=>g.status==='Pending').length,
-        inp=G.filter(g=>g.status==='In Progress').length,
-        esc=G.filter(g=>g.status==='Escalated').length,
-        res=G.filter(g=>g.status==='Resolved').length;
-
-  document.getElementById('adm-kpi').innerHTML = [
-    kpi('Total',  total,'blue'),
-    kpi('Pending', pend,'yellow'),
-    kpi('In Prog', inp, 'purple'),
-    kpi('Escalated 🚨', esc, 'red'),
-    kpi('Resolved',res,'green')
-  ].join('');
-
-  /* Dept */
-  const dT=[0,0,0,0,0],dP=[0,0,0,0,0],dI=[0,0,0,0,0],
-        dE=[0,0,0,0,0],dR=[0,0,0,0,0],dRat=[0,0,0,0,0],dRc=[0,0,0,0,0];
-  const vT=Array(6).fill(0),vA=Array(6).fill(0);
-  G.forEach(g=>{
-    const d=g.dept_id,v=g.village_id; dT[d]++; vT[v]++;
-    if(g.status==='Pending')    {dP[d]++;vA[v]++;}
-    else if(g.status==='In Progress'){dI[d]++;vA[v]++;}
-    else if(g.status==='Escalated')  {dE[d]++;vA[v]++;}
-    else if(g.status==='Resolved')   {dR[d]++;if(g.rating>0){dRat[d]+=g.rating;dRc[d]++;}}
-  });
-  document.getElementById('adm-dept-tbody').innerHTML=DEPARTMENTS.map((d,i)=>{
-    const avg=dRc[i]>0?(dRat[i]/dRc[i]).toFixed(1)+'/5':'—';
-    return `<tr><td><span class="dept-chip">${d}</span></td>
-      <td>${dT[i]}</td><td>${dP[i]}</td><td>${dI[i]}</td>
-      <td>${dE[i]>0?`<span style="color:var(--red)">${dE[i]}</span>`:0}</td>
-      <td>${dR[i]}</td><td>${avg}</td></tr>`;
-  }).join('');
-  document.getElementById('adm-vill-tbody').innerHTML=VILLAGES.map((v,i)=>`<tr>
-    <td><span class="village-chip">${v}</span></td>
-    <td>${vT[i]}</td>
-    <td>${vA[i]>0?`<span style="color:var(--orange)">${vA[i]}</span>`:0}</td>
-  </tr>`).join('');
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   HISTORY DISPLAY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function renderHistoryDisplay(elId, limit=20) {
-  const H = getHistory().slice(0, limit);
-  const el = document.getElementById(elId);
-  if (!H.length) { el.innerHTML='<p style="color:var(--muted)">No history entries</p>'; return; }
-  el.innerHTML = H.map((h,i)=>`
-    <div class="stack-item">
-      <div class="stack-num">${i+1}</div>
-      <div>
-        <span style="color:var(--accent);font-weight:700;">#${h.ticket_id}</span>
-        <span style="color:var(--muted);font-size:.72rem;"> [${h.actor}] ${h.timestamp}</span><br>
-        <span style="color:var(--orange)">${h.action}</span>
-      </div>
-    </div>`).join('');
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SECTION 5 — ROAD NETWORK
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-const ABBR = ["HQ","Ram","Sit","Gop","Kri","Bal"];
-
-function renderGraph() {
-  /* Distance matrix */
-  const hdr = ['', ...ABBR.map(a=>`<th style="padding:4px 6px;color:var(--muted);font-size:.72rem">${a}</th>`)].join('');
-  let html = `<table class="g-table"><thead><tr>${hdr}</tr></thead><tbody>`;
-  ROAD_GRAPH.forEach((row,i)=>{
-    html+=`<tr><td style="padding:4px 8px;color:var(--muted);font-size:.72rem;white-space:nowrap">${VILLAGES[i].slice(0,9)}</td>`;
-    row.forEach((w,j)=>{
-      const cls = i===j ? 'g-diag' : w>0 ? 'g-road' : 'g-none';
-      html+=`<td><div class="g-cell ${cls}">${i===j?'·':w>0?w:'—'}</div></td>`;
-    });
-    html+='</tr>';
-  });
-  html+='</tbody></table>';
-  document.getElementById('adj-matrix').innerHTML=html;
-
-  /* Populate selects */
-  ['dijk-src','dijk-dst','bfs-src'].forEach(id=>{
-    const sel=document.getElementById(id);
-    if(sel) sel.innerHTML=VILLAGES.map((v,i)=>`<option value="${i}">${v}</option>`).join('');
-  });
-  document.getElementById('dijk-dst').value='1';
-}
-
-/* Dijkstra's algorithm */
-function dijkstra(src, dst) {
-  const dist=Array(6).fill(INF), prev=Array(6).fill(-1), vis=Array(6).fill(false);
-  dist[src]=0;
-  for(let c=0;c<5;c++){
-    let u=-1,m=INF;
-    for(let v=0;v<6;v++) if(!vis[v]&&dist[v]<m){m=dist[v];u=v;}
-    if(u===-1) break;
-    vis[u]=true;
-    for(let v=0;v<6;v++){
-      if(!vis[v]&&ROAD_GRAPH[u][v]>0&&dist[u]+ROAD_GRAPH[u][v]<dist[v]){
-        dist[v]=dist[u]+ROAD_GRAPH[u][v]; prev[v]=u;
-      }
-    }
-  }
-  if(dist[dst]===INF) return null;
-  const path=[]; let cur=dst;
-  while(cur!==-1){path.unshift(cur);cur=prev[cur];}
-  return {path, dist:dist[dst]};
-}
-
-function runDijkstra() {
-  const src=parseInt(document.getElementById('dijk-src').value);
-  const dst=parseInt(document.getElementById('dijk-dst').value);
-  const el =document.getElementById('dijk-result');
-  if(src===dst){el.innerHTML=alertHtml('Source and destination are the same','warn');return;}
-  const r=dijkstra(src,dst);
-  if(!r){el.innerHTML=alertHtml('No path found — village may be isolated!','danger');return;}
-  const pathHtml=r.path.map((n,i)=>
-    `<span class="path-node">📍 ${VILLAGES[n]}</span>${i<r.path.length-1?'<span class="path-sep"> → </span>':''}`
-  ).join('');
-  el.innerHTML=`<div class="alert alert-success">
-    <strong>Shortest Distance: ${r.dist} km</strong>
-    <div class="path-chain" style="margin-top:8px;">${pathHtml}</div>
-  </div>`;
-}
-
-/* BFS */
-function bfsTraverse(src) {
-  const vis=Array(6).fill(false), queue=[src], order=[];
-  vis[src]=true;
-  while(queue.length){
-    const v=queue.shift(); order.push(v);
-    for(let i=0;i<6;i++) if(ROAD_GRAPH[v][i]>0&&!vis[i]){vis[i]=true;queue.push(i);}
-  }
-  return {order, vis};
-}
-
-function runBFS() {
-  const src=parseInt(document.getElementById('bfs-src').value);
-  const {order,vis}=bfsTraverse(src);
-  const isolated=VILLAGES.filter((_,i)=>!vis[i]);
-  const pathHtml=order.map((n,i)=>
-    `<span class="path-node">🔄 ${VILLAGES[n]}</span>${i<order.length-1?'<span class="path-sep"> → </span>':''}`
-  ).join('');
-  document.getElementById('bfs-result').innerHTML=`<div class="alert ${isolated.length?'alert-warn':'alert-success'}">
-    <strong>Reachability scan from ${VILLAGES[src]}:</strong>
-    <div class="path-chain" style="margin-top:8px;">${pathHtml}</div>
-    ${isolated.length
-      ?`<br><span style="color:var(--red)">⚠ Isolated: ${isolated.join(', ')}</span>`
-      :'<br>✅ All villages reachable from this node.'}
-  </div>`;
-}
-
-/* DFS */
-function dfsTraverse(src) {
-  const vis=Array(6).fill(false), order=[];
-  function dfs(v){vis[v]=true;order.push(v);for(let i=0;i<6;i++) if(ROAD_GRAPH[v][i]>0&&!vis[i]) dfs(i);}
-  dfs(src);
-  return order;
-}
-
-function runDFS() {
-  const src=parseInt(document.getElementById('bfs-src').value);
-  const order=dfsTraverse(src);
-  const pathHtml=order.map((n,i)=>
-    `<span class="path-node">🔁 ${VILLAGES[n]}</span>${i<order.length-1?'<span class="path-sep"> → </span>':''}`
-  ).join('');
-  document.getElementById('bfs-result').innerHTML=`<div class="alert alert-info">
-    <strong>Deep scan from ${VILLAGES[src]}:</strong>
-    <div class="path-chain" style="margin-top:8px;">${pathHtml}</div>
-  </div>`;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SECTION 6 — SYSTEM INTERNALS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function renderDS() {
-  const G = getGrievances();
-  const C = getCitizens();
-  const O = getOfficials();
-  const H = getHistory();
-
-  /* Grievance ledger */
-  document.getElementById('ll-visual').innerHTML =
-    G.length
-      ? G.map((g,i)=>`
-          <span class="ll-node" style="border-color:${statusColor(g.status)}">
-            <span class="ll-id">#${g.ticket_id}</span>
-            <span class="ll-info">${DEPARTMENTS[g.dept_id].slice(0,8)}</span>
-            <span class="ll-info">${VILLAGES[g.village_id].slice(0,8)}</span>
-          </span>${i<G.length-1?'<span class="ll-arrow">→</span>':'<span class="ll-null"> NULL</span>'}`)
-        .join('')
-      : '<span style="color:var(--muted)">No records</span>';
-
-  /* Task queue (sorted active) */
-  const active=G.filter(g=>g.status!=='Resolved')
-    .sort((a,b)=>b.priority-a.priority||b.days_pending-a.days_pending);
-  document.getElementById('pq-visual').innerHTML = active.length
-    ? active.map((g,i)=>`
-        <div class="bst-row" style="gap:12px;">
-          <span style="color:var(--muted);font-size:.72rem;min-width:20px">${i+1}.</span>
-          ${priPill(g.priority)}
-          <span class="bst-id">#${g.ticket_id}</span>
-          <span style="font-size:.78rem;color:var(--muted)">${DEPARTMENTS[g.dept_id]} · Day ${g.days_pending}</span>
-          ${statusBadge(g.status)}
-        </div>`)
-      .join('')
-    : '<span style="color:var(--muted)">Task queue empty</span>';
-
-  /* Sorted by ticket ID ascending */
-  const sorted=[...G].sort((a,b)=>a.ticket_id-b.ticket_id);
-  document.getElementById('bst-visual').innerHTML = sorted.length
-    ? sorted.map(g=>`
-        <div class="bst-row">
-          <span class="bst-id">#${g.ticket_id}</span>
-          <span class="dept-chip" style="font-size:.7rem">${DEPARTMENTS[g.dept_id].slice(0,10)}</span>
-          <span class="village-chip" style="font-size:.7rem">${VILLAGES[g.village_id]}</span>
-          ${statusBadge(g.status)}
-        </div>`)
-      .join('')
-    : '<span style="color:var(--muted)">No records indexed</span>';
-
-  /* Activity log */
-  document.getElementById('stack-visual').innerHTML = H.length
-    ? H.slice(0,10).map((h,i)=>`
-        <div class="stack-item">
-          <div class="stack-num">${i+1}</div>
-          <div style="font-size:.76rem">
-            <span style="color:var(--accent)">#${h.ticket_id}</span>
-            <span style="color:var(--muted)"> · ${h.actor} · ${h.timestamp}</span><br>
-            <span style="color:var(--orange)">${h.action}</span>
-          </div>
-        </div>`)
-      .join('')
-    : '<span style="color:var(--muted)">No activity log</span>';
-
-  /* Citizen array */
-  document.getElementById('citizen-arr-visual').innerHTML = C.map((c,i)=>`
-    <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:9px 13px;font-size:.74rem;min-width:130px;">
-      <div style="color:var(--muted);font-size:.65rem;">[${i}]</div>
-      <div style="color:var(--accent);font-weight:700">${c.id}</div>
-      <div>${c.name}</div>
-      <div style="color:var(--muted)">${c.phone}</div>
-    </div>`).join('') || '<span style="color:var(--muted)">Empty</span>';
-
-  /* Official array */
-  document.getElementById('official-arr-visual').innerHTML = O.map((o,i)=>`
-    <div style="background:var(--surface2);border:1px solid ${o.active?'var(--green)':'var(--border2)'};border-radius:7px;padding:9px 13px;font-size:.74rem;min-width:130px;">
-      <div style="color:var(--muted);font-size:.65rem;">[${i}]</div>
-      <div style="color:var(--purple);font-weight:700">${o.id}</div>
-      <div>${o.name}</div>
-      <div style="color:var(--muted);font-size:.7rem">${o.dept===-1||o.dept===undefined?'All':DEPARTMENTS[o.dept]}</div>
-      <div style="color:${o.active?'var(--green)':'var(--red)'};font-size:.68rem">${o.active?'Active':'Inactive'}</div>
-    </div>`).join('') || '<span style="color:var(--muted)">Empty</span>';
-}
-
-function statusColor(s) {
-  return {
-    'Pending':'#238636','In Progress':'#9e6a03',
-    'Escalated':'#da3633','Resolved':'#1b6f74'
-  }[s]||'var(--border2)';
-}
-
-let currentExportType = 'grievances';
-
-function generateCitizensTxt() {
-  const C = getCitizens();
-  const nxt = LS.get('gms_next_citizen', 6);
-  let txt = "# CITIZEN REGISTRY\n# NEXT_CITIZEN_ID: " + nxt + "\n# citizen_id|aadhaar|phone|active|name\n";
-  C.forEach(c => {
-    const nm = (c.name || '').replace(/\|/g, '-');
-    txt += `${c.id}|${c.aadhaar}|${c.phone}|1|${nm}\n`;
-  });
-  return txt;
-}
-
-function generateOfficialsTxt() {
-  const O = getOfficials();
-  const nxt = LS.get('gms_next_official', 104);
-  let txt = "# OFFICIAL ACCOUNTS REGISTRY\n# NEXT_OFFICIAL_ID: " + nxt + "\n# official_id|username|password|dept_assigned|active|name\n";
-  O.forEach(o => {
-    const dept = (o.dept === undefined) ? -1 : o.dept;
-    const nm = (o.name || '').replace(/\|/g, '-');
-    txt += `${o.id}|${o.username}|${o.password}|${dept}|${o.active ? 1 : 0}|${nm}\n`;
-  });
-  return txt;
-}
-
-function generateGrievancesTxt() {
-  const G = getGrievances();
-  const nxt = LS.get('gms_next_ticket', 1008);
-  let txt = "# GRIEVANCES DATABASE\n# NEXT_TICKET_ID: " + nxt + "\n# ticket_id|citizen_id|village_id|dept_id|is_hazard|priority|days_pending|assigned_official_id|status|submitted_at|resolved_at|rating|description|remarks|feedback\n";
-  G.forEach(g => {
-    const haz = g.is_hazard ? 1 : 0;
-    const aoid = g.assigned_official_id ?? -1;
-    const desc = (g.description || '').replace(/\|/g, '-').replace(/\r?\n/g, ' ');
-    const rem = (g.remarks || '').replace(/\|/g, '-').replace(/\r?\n/g, ' ');
-    const fb = (g.feedback || '').replace(/\|/g, '-').replace(/\r?\n/g, ' ');
-    txt += `${g.ticket_id}|${g.citizen_id}|${g.village_id}|${g.dept_id}|${haz}|${g.priority}|${g.days_pending}|${aoid}|${g.status}|${g.submitted_at || ''}|${g.resolved_at || ''}|${g.rating || 0}|${desc}|${rem}|${fb}\n`;
-  });
-  return txt;
-}
-
-function generateHistoryTxt() {
-  const H = getHistory();
-  let txt = "# ACTION / AUDIT HISTORY LOG (Most recent on top)\n# ticket_id|action|actor|timestamp\n";
-  H.forEach(h => {
-    const act = (h.action || '').replace(/\|/g, '-');
-    const actor = (h.actor || '').replace(/\|/g, '-');
-    txt += `${h.ticket_id}|${act}|${actor}|${h.timestamp || ''}\n`;
-  });
-  return txt;
-}
-
-function getExportContent(type) {
-  if (type === 'citizens')  return generateCitizensTxt();
-  if (type === 'officials') return generateOfficialsTxt();
-  if (type === 'grievances')return generateGrievancesTxt();
-  if (type === 'history')   return generateHistoryTxt();
-  if (type === 'json') {
-    return JSON.stringify({
-      exportedAt: nowTs(),
-      citizens: getCitizens(),
-      grievances: getGrievances(),
-      officials: getOfficials(),
-      history: getHistory()
-    }, null, 2);
-  }
-  return '';
-}
-
-function selectExportView(type) {
-  currentExportType = type;
-  const chipIds = ['grievances','citizens','officials','history','json'];
-  chipIds.forEach(id => {
-    const el = document.getElementById('chip-txt-' + id);
-    if (el) el.classList.toggle('active-chip', id === type);
-  });
-  const viewEl = document.getElementById('export-file-view');
-  if (viewEl) viewEl.value = getExportContent(type);
-}
-
-function copyCurrentExportView() {
-  const viewEl = document.getElementById('export-file-view');
-  if (!viewEl || !viewEl.value) return;
-  const label = currentExportType === 'json' ? 'JSON' : `${currentExportType}.txt`;
-  navigator.clipboard.writeText(viewEl.value).then(() => {
-    toast(`Copied ${label} to clipboard!`);
-  }).catch(() => {
-    viewEl.select();
-    document.execCommand('copy');
-    toast(`Copied ${label} to clipboard!`);
-  });
-}
-
-function downloadFile(filename, text, mime='text/plain') {
-  const blob = new Blob([text], { type: mime });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function downloadCurrentTxtFile() {
-  const content = getExportContent(currentExportType);
-  if (!content) return;
-  const filename = currentExportType === 'json'
-    ? `rural_grievance_data_${Date.now()}.json`
-    : `${currentExportType}.txt`;
-  downloadFile(filename, content, currentExportType === 'json' ? 'application/json' : 'text/plain');
-  toast(`Downloaded ${filename}`);
-}
-
-function downloadAllTxtFiles() {
-  const files = [
-    { name: 'grievances.txt', content: generateGrievancesTxt() },
-    { name: 'citizens.txt',   content: generateCitizensTxt() },
-    { name: 'officials.txt',  content: generateOfficialsTxt() },
-    { name: 'history.txt',    content: generateHistoryTxt() }
-  ];
-  files.forEach((f, idx) => {
-    setTimeout(() => {
-      downloadFile(f.name, f.content);
-    }, idx * 250);
-  });
-  toast('Downloading all 4 .txt files...');
-}
-
-function renderExportPanel() {
-  const C = getCitizens();
-  const G = getGrievances();
-
-  /* Citizens table */
-  document.getElementById('export-citizens-tbody').innerHTML = C.map(c => `
-    <tr>
-      <td><strong>${c.id}</strong></td>
-      <td>${c.name}</td>
-      <td><span style="font-family:var(--mono)">${c.aadhaar}</span></td>
-      <td>${c.phone}</td>
-      <td>${c.active !== false ? '<span style="color:var(--green)">✓ Active</span>' : '<span style="color:var(--red)">Deactivated</span>'}</td>
-    </tr>
-  `).join('') || '<tr><td colspan="5" style="color:var(--muted)">No citizens recorded</td></tr>';
-
-  /* Grievances table */
-  const cMap = {};
-  C.forEach(c => cMap[c.id] = c.name);
-  document.getElementById('export-grievances-tbody').innerHTML = G.map(g => `
-    <tr>
-      <td><strong>#${g.ticket_id}</strong></td>
-      <td>${cMap[g.citizen_id] || g.citizen_id}</td>
-      <td>${VILLAGES[g.village_id]}</td>
-      <td>${DEPARTMENTS[g.dept_id]}</td>
-      <td>${priPill(g.priority)}</td>
-      <td>${statusBadge(g.status)}</td>
-      <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${g.description}</td>
-    </tr>
-  `).join('') || '<tr><td colspan="7" style="color:var(--muted)">No grievances recorded</td></tr>';
-
-  /* Refresh active file view */
-  selectExportView(currentExportType);
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   BOOT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-renderOverview();
-renderGraph();
-</script>
+<script src="app.js"></script>
 </body>
 </html>

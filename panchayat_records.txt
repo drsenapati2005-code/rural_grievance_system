@@ -1,0 +1,141 @@
+# ============================================================================
+# RURAL PUBLIC SERVICE REQUEST & GRIEVANCE MANAGEMENT SYSTEM
+# Master Append-Only Record Ledger (panchayat_records.txt)
+# Format: TIMESTAMP | SOURCE | RECORD_TYPE | ID | ACTOR | DETAILS
+# Note  : New actions and records are strictly appended; prior lines persist.
+# ============================================================================
+2026-11-24 17:15:12 | CLI/FILE | CITIZEN_RECORD     | #1      | System             | Name: Ramesh Kumar; Aadhaar: 1234-5678-9101; Phone: 9876543210; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | CITIZEN_RECORD     | #2      | System             | Name: Sunita Devi; Aadhaar: 2345-6789-1012; Phone: 9823456780; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | CITIZEN_RECORD     | #3      | System             | Name: Mohan Singh; Aadhaar: 3456-7891-0123; Phone: 9712345670; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | CITIZEN_RECORD     | #4      | System             | Name: Priya Sharma; Aadhaar: 4567-8910-1234; Phone: 9634567890; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | CITIZEN_RECORD     | #5      | System             | Name: Lakshmi Bai; Aadhaar: 5678-9101-2345; Phone: 9545678901; Status: Active
+2026-11-24 17:31:00 | CLI/FILE | CITIZEN_REGISTER   | #6      | Vikram Singh       | Name: Vikram Singh; Aadhaar: 9988-7766-5544; Phone: 9123456789; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | OFFICIAL_RECORD    | #101    | System             | Name: Suresh Verma; Username: sverma; Dept: Electricity; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | OFFICIAL_RECORD    | #102    | System             | Name: Anita Pandey; Username: apandey; Dept: Water Supply; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | OFFICIAL_RECORD    | #103    | System             | Name: Rajan Tiwari; Username: rtiwari; Dept: Roads; Status: Active
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1001   | Ramesh Kumar       | Village: Rampur; Dept: Electricity; Priority: 10 (Hazard); Status: Escalated; Days: 9; Desc: High-tension live wire fallen across school road. Severe electrocution risk.; Remarks: Sent to divisional lineman.
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1002   | Sunita Devi        | Village: Sitapur; Dept: Water Supply; Priority: 5 (Normal); Status: Pending; Days: 8; Desc: Community handpump broken. 300 families without drinking water.; Remarks: None
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1003   | Mohan Singh        | Village: Gopalpur; Dept: Roads; Priority: 10 (Hazard); Status: In Progress; Days: 4; Desc: Large pothole filled with stagnant water blocking ambulance route to PHC.; Remarks: Road crew dispatched. Repair ETA 2 days.
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1004   | Priya Sharma       | Village: Krishnapur; Dept: Welfare Schemes; Priority: 5 (Normal); Status: Pending; Days: 2; Desc: MNREGA October wages not credited. 45 labourers affected.; Remarks: None
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1005   | Lakshmi Bai        | Village: Balipur; Dept: Sanitation; Priority: 5 (Normal); Status: Pending; Days: 5; Desc: Open drain overflowing near primary school. Health hazard.; Remarks: None
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1006   | Ramesh Kumar       | Village: Rampur; Dept: Electricity; Priority: 5 (Normal); Status: Resolved; Days: 0; Desc: All street lights on main bazaar road non-functional for 5 nights.; Remarks: Fuse replaced and all lights restored.; Rating: 4/5 (Fixed quickly, good work!)
+2026-11-24 17:15:12 | CLI/FILE | GRIEVANCE_RECORD   | #1007   | Sunita Devi        | Village: Sitapur; Dept: Water Supply; Priority: 10 (Hazard); Status: Pending; Days: 1; Desc: Tap water appears brown/contaminated. Children falling sick.; Remarks: None
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #7      | Arjun Yadav        | Name: Arjun Yadav; Aadhaar: 6789-1012-3456; Phone: 9811223344; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #8      | Kamla Verma        | Name: Kamla Verma; Aadhaar: 7890-1234-5678; Phone: 9845012345; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #9      | Harish Chandra     | Name: Harish Chandra; Aadhaar: 8901-2345-6789; Phone: 9755112233; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #10     | Geeta Kumari       | Name: Geeta Kumari; Aadhaar: 9012-3456-7890; Phone: 9665443322; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #11     | Mahesh Prasad      | Name: Mahesh Prasad; Aadhaar: 1122-3344-5566; Phone: 9911887766; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #12     | Rekha Dubey        | Name: Rekha Dubey; Aadhaar: 2233-4455-6677; Phone: 9822998877; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #13     | Dinesh Chauhan     | Name: Dinesh Chauhan; Aadhaar: 3344-5566-7788; Phone: 9733009988; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_RECORD     | #14     | Sarita Patel       | Name: Sarita Patel; Aadhaar: 4455-6677-8899; Phone: 9644110099; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | CITIZEN_DEACTIVATE | #15     | Admin              | Name: Bhagwan Das; Aadhaar: 5566-7788-9900; Phone: 9555221100; Status: Deactivated
+2026-11-28 10:08:00 | CLI/FILE | OFFICIAL_ADD       | #104    | Admin              | Name: Meena Kulkarni; Username: mkulkarni; Dept: Sanitation; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | OFFICIAL_ADD       | #105    | Admin              | Name: Vinod Yadav; Username: vyadav; Dept: Welfare Schemes; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | OFFICIAL_ADD       | #106    | Admin              | Name: Deepak Patel; Username: dpatel; Dept: Water Supply; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | OFFICIAL_ADD       | #107    | Admin              | Name: Rajeshwar Singh; Username: rsingh; Dept: All Departments; Status: Active
+2026-11-28 10:08:00 | CLI/FILE | OFFICIAL_DEACTIVATE| #108    | Admin              | Name: Kavita Mishra; Username: kmishra; Dept: Roads; Status: Deactivated
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1008   | Vikram Singh       | Village: Rampur; Dept: Roads; Priority: 10 (Hazard); Status: Escalated; Days: 10; Desc: Culvert bridge slab cracked near grain mandi; tractors cannot cross safely.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1009   | Kamla Verma        | Village: Sitapur; Dept: Sanitation; Priority: 10 (Hazard); Status: In Progress; Days: 3; Desc: Choked sewer chamber overflowing behind sub-health centre.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1010   | Harish Chandra     | Village: Gopalpur; Dept: Electricity; Priority: 5 (Normal); Status: In Progress; Days: 6; Desc: Severe voltage fluctuation damaging agricultural irrigation tube-well motors.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1011   | Geeta Kumari       | Village: Balipur; Dept: Roads; Priority: 10 (Normal); Status: Escalated; Days: 7; Desc: Link road shoulder washed out near bus stand creating steep drop.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1012   | Mahesh Prasad      | Village: Krishnapur; Dept: Electricity; Priority: 10 (Hazard); Status: In Progress; Days: 2; Desc: Sparking feeder transformer leaking hot oil outside Anganwadi gate.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1013   | Rekha Dubey        | Village: Rampur; Dept: Water Supply; Priority: 5 (Normal); Status: Pending; Days: 4; Desc: Overhead tank sluice valve leaking continuously; West Tola supply pressure low.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1014   | Dinesh Chauhan     | Village: Gopalpur; Dept: Sanitation; Priority: 10 (Normal); Status: Escalated; Days: 9; Desc: Solid-waste collection tractor inactive for 10 days; waste piling at market chowk.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1015   | Sarita Patel       | Village: Sitapur; Dept: Welfare Schemes; Priority: 5 (Normal); Status: In Progress; Days: 3; Desc: Old-age and widow pension verification list pending e-KYC clearance at Block HQ.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RECORD   | #1016   | Vikram Singh       | Village: Balipur; Dept: Water Supply; Priority: 5 (Normal); Status: Pending; Days: 1; Desc: Solar borewell inverter tripped at northern hamlet drinking point.
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1017   | Rajan Tiwari       | Village: Sitapur; Dept: Roads; Status: Resolved; Rating: 5/5 (Smooth road now, even ambulance enters easily!)
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1018   | Anita Pandey       | Village: Gopalpur; Dept: Water Supply; Status: Resolved; Rating: 5/5 (Water restored within 30 hours. Very responsive team.)
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1019   | Meena Kulkarni     | Village: Krishnapur; Dept: Sanitation; Status: Resolved; Rating: 4/5 (Clean surroundings now, appreciate the follow-up.)
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1020   | Suresh Verma       | Village: Balipur; Dept: Electricity; Status: Resolved; Rating: 5/5 (Saved our cattle shed before nightfall, thank you.)
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1021   | Suresh Verma       | Village: Sitapur; Dept: Electricity; Status: Resolved; Rating: 3/5 (Issue solved, though response took three days.)
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1022   | Vinod Yadav        | Village: Gopalpur; Dept: Welfare Schemes; Status: Resolved; Rating: 5/5 (Everyone received November quota smoothly.)
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1023   | Vinod Yadav        | Village: Rampur; Dept: Welfare Schemes; Status: Resolved; Rating: Pending Citizen Feedback
+2026-11-28 10:08:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1024   | Vinod Yadav        | Village: Balipur; Dept: Welfare Schemes; Status: Resolved; Rating: Pending Citizen Feedback
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #16     | Santosh Tiwari     | Name: Santosh Tiwari; Aadhaar: 2692-3948-5236; Phone: 9803099376; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #17     | Meera Rathore      | Name: Meera Rathore; Aadhaar: 2729-4001-5307; Phone: 9803293087; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #18     | Kailash Maurya     | Name: Kailash Maurya; Aadhaar: 2766-4054-5378; Phone: 9803486798; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #19     | Savita Nishad      | Name: Savita Nishad; Aadhaar: 2803-4107-5449; Phone: 9803680509; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #20     | Raghavendra Pal    | Name: Raghavendra Pal; Aadhaar: 2840-4160-5520; Phone: 9803874220; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #21     | Nirmala Devi       | Name: Nirmala Devi; Aadhaar: 2877-4213-5591; Phone: 9804067931; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #22     | Prakash Vishwakarma | Name: Prakash Vishwakarma; Aadhaar: 2914-4266-5662; Phone: 9804261642; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #23     | Anita Rawat        | Name: Anita Rawat; Aadhaar: 2951-4319-5733; Phone: 9804455353; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #24     | Umesh Kashyap      | Name: Umesh Kashyap; Aadhaar: 2988-4372-5804; Phone: 9804649064; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #25     | Babita Gautam      | Name: Babita Gautam; Aadhaar: 3025-4425-5875; Phone: 9804842775; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #26     | Shyam Sunder       | Name: Shyam Sunder; Aadhaar: 3062-4478-5946; Phone: 9805036486; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #27     | Kiran Lata         | Name: Kiran Lata; Aadhaar: 3099-4531-6017; Phone: 9805230197; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #28     | Brijesh Lodhi      | Name: Brijesh Lodhi; Aadhaar: 3136-4584-6088; Phone: 9805423908; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_DEACTIVATE | #29     | Admin              | Name: Girdhari Lal; Aadhaar: 3173-4637-6159; Phone: 9805617619; Status: Deactivated
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #30     | Poonam Shukla      | Name: Poonam Shukla; Aadhaar: 3210-4690-6230; Phone: 9805811330; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #31     | Narendra Kushwaha  | Name: Narendra Kushwaha; Aadhaar: 3247-4743-6301; Phone: 9806005041; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #32     | Shashi Kala        | Name: Shashi Kala; Aadhaar: 3284-4796-6372; Phone: 9806198752; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #33     | Omprakash Sahu     | Name: Omprakash Sahu; Aadhaar: 3321-4849-6443; Phone: 9806392463; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #34     | Phoolwati Devi     | Name: Phoolwati Devi; Aadhaar: 3358-4902-6514; Phone: 9806586174; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #35     | Devendra Rajput    | Name: Devendra Rajput; Aadhaar: 3395-4955-6585; Phone: 9806779885; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #36     | Radha Krishnan     | Name: Radha Krishnan; Aadhaar: 3432-5008-6656; Phone: 9806973596; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #37     | Munna Lal          | Name: Munna Lal; Aadhaar: 3469-5061-6727; Phone: 9807167307; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_DEACTIVATE | #38     | Admin              | Name: Vimla Srivastava; Aadhaar: 3506-5114-6798; Phone: 9807361018; Status: Deactivated
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #39     | Jitendra Pandey    | Name: Jitendra Pandey; Aadhaar: 3543-5167-6869; Phone: 9807554729; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #40     | Kavita Solanki     | Name: Kavita Solanki; Aadhaar: 3580-5220-6940; Phone: 9807748440; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #41     | Gopal Ji Tiwari    | Name: Gopal Ji Tiwari; Aadhaar: 3617-5273-7011; Phone: 9807942151; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #42     | Usha Bharti        | Name: Usha Bharti; Aadhaar: 3654-5326-7082; Phone: 9808135862; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #43     | Rakesh Ahirwar     | Name: Rakesh Ahirwar; Aadhaar: 3691-5379-7153; Phone: 9808329573; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #44     | Pushpa Tomar       | Name: Pushpa Tomar; Aadhaar: 3728-5432-7224; Phone: 9808523284; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #45     | Subhash Baghel     | Name: Subhash Baghel; Aadhaar: 3765-5485-7295; Phone: 9808716995; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #46     | Malti Sen          | Name: Malti Sen; Aadhaar: 3802-5538-7366; Phone: 9808910706; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_DEACTIVATE | #47     | Admin              | Name: Harprasad Korwa; Aadhaar: 3839-5591-7437; Phone: 9809104417; Status: Deactivated
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #48     | Suman Lata Joshi   | Name: Suman Lata Joshi; Aadhaar: 3876-5644-7508; Phone: 9809298128; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #49     | Trilok Chand       | Name: Trilok Chand; Aadhaar: 3913-5697-7579; Phone: 9809491839; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | CITIZEN_REGISTER   | #50     | Kunti Devi         | Name: Kunti Devi; Aadhaar: 3950-5750-7650; Phone: 9809685550; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #109    | Admin              | Name: Alok Tripathi; Username: atripathi; Dept: Electricity; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #110    | Admin              | Name: Vandana Joshi; Username: vjoshi; Dept: Sanitation; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #111    | Admin              | Name: Rameshwar Gupta; Username: rgupta; Dept: Welfare Schemes; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #112    | Admin              | Name: Neha Chaudhary; Username: nchaudhary; Dept: Water Supply; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #113    | Admin              | Name: Pradeep Thakur; Username: pthakur; Dept: Roads; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #114    | Admin              | Name: Seema Bhargava; Username: sbhargava; Dept: Electricity; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #115    | Admin              | Name: Manoj Saxena; Username: msaxena; Dept: Sanitation; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #116    | Admin              | Name: Kalyani Deshmukh; Username: kdeshmukh; Dept: Welfare Schemes; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #117    | Admin              | Name: Harinder Gill; Username: hgill; Dept: Roads; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #118    | Admin              | Name: Sunil Banjara; Username: sbanjara; Dept: Water Supply; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #119    | Admin              | Name: Pooja Rathore; Username: prathore; Dept: Electricity; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #120    | Admin              | Name: Nitin Chaturvedi; Username: nchaturvedi; Dept: Sanitation; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #121    | Admin              | Name: Rekha Sengar; Username: rsengar; Dept: Welfare Schemes; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #122    | Admin              | Name: Tarun Bhasin; Username: tbhasin; Dept: Roads; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #123    | Admin              | Name: Dr. Asha Nair; Username: anair; Dept: All Departments; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_DEACTIVATE | #124    | Admin              | Name: Yogeshwar Koli; Username: ykoli; Dept: Water Supply; Status: Deactivated
+2026-11-28 10:15:00 | CLI/FILE | OFFICIAL_ADD       | #125    | Admin              | Name: Bharti Menon; Username: bmenon; Dept: Welfare Schemes; Status: Active
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RECORD   | #1025   | Santosh Tiwari     | Village: Rampur; Dept: Welfare Schemes; Priority: 5; Status: In Progress; Desc: Maternity benefit disbursement delayed for 9 registered mothers in Rampur.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RECORD   | #1026   | Meera Rathore      | Village: Sitapur; Dept: Roads; Priority: 5; Status: Pending; Desc: Broken speed-breaker slabs near Sitapur High School entrance.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RECORD   | #1027   | Kailash Maurya     | Village: Gopalpur; Dept: Water Supply; Priority: 10; Status: In Progress; Desc: Main chlorinator dosing pump failed at Gopalpur overhead reservoir.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RECORD   | #1028   | Savita Nishad      | Village: Gopalpur; Dept: Welfare Schemes; Priority: 10; Status: Escalated; Desc: Crop insurance hailstorm loss survey pending for 18 marginal farmers.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RECORD   | #1029   | Raghavendra Pal    | Village: Krishnapur; Dept: Sanitation; Priority: 10; Status: Escalated; Desc: Dead livestock carcass disposal pit flooded near Krishnapur eastern bund.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RECORD   | #1030   | Nirmala Devi       | Village: Balipur; Dept: Electricity; Priority: 10; Status: Pending; Desc: Snapped service drop cable sparking above Balipur ration shop roof.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1031   | Anita Pandey       | Village: Rampur; Dept: Water Supply; Priority: 5; Status: Resolved; Desc: Check-dam sluice shutter jammed near irrigation tank.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1032   | Alok Tripathi      | Village: Sitapur; Dept: Electricity; Priority: 10; Status: Resolved; Desc: Damaged capacitor bank at rural 11kV substation bay.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1033   | Harinder Gill      | Village: Gopalpur; Dept: Roads; Priority: 5; Status: Resolved; Desc: Waterlogged bus-stop layby causing passenger slip hazard.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1034   | Nitin Chaturvedi   | Village: Krishnapur; Dept: Sanitation; Priority: 5; Status: Resolved; Desc: Blocked culvert grating collecting plastic debris near school.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1035   | Bharti Menon       | Village: Balipur; Dept: Welfare Schemes; Priority: 5; Status: Resolved; Desc: Widow pension bank IFSC migration pending post bank merger.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1036   | Deepak Patel       | Village: Rampur; Dept: Water Supply; Priority: 5; Status: Resolved; Desc: Handpump platform apron cracked letting dirty runoff seep in.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1037   | Seema Bhargava     | Village: Sitapur; Dept: Electricity; Priority: 5; Status: Resolved; Desc: Loose neutral conductor causing flickering in Harijan Basti.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1038   | Tarun Bhasin       | Village: Gopalpur; Dept: Roads; Priority: 10; Status: Resolved; Desc: Overgrown thorny scrub narrowing blind turn toward canal road.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1039   | Meena Kulkarni     | Village: Krishnapur; Dept: Sanitation; Priority: 5; Status: Resolved; Desc: Mosquito fogging overdue around low-lying paddy fringes.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1040   | Bharti Menon       | Village: Balipur; Dept: Welfare Schemes; Priority: 5; Status: Resolved; Desc: PMAY-G second installment geo-tag photo verification stuck.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1041   | Neha Chaudhary     | Village: Rampur; Dept: Water Supply; Priority: 5; Status: Resolved; Desc: Standpost brass tap stolen leaving community point running continuously.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1042   | Pooja Rathore      | Village: Sitapur; Dept: Electricity; Priority: 5; Status: Resolved; Desc: High-mast solar tower battery controller fault at bazaar chowk.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1043   | Rajan Tiwari       | Village: Gopalpur; Dept: Roads; Priority: 5; Status: Resolved; Desc: Missing kilometer milestones and curve warning boards on link road.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1044   | Vandana Joshi      | Village: Krishnapur; Dept: Sanitation; Priority: 10; Status: Resolved; Desc: Community toilet overhead tank float valve broken.; Rating: 3/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1045   | Bharti Menon       | Village: Balipur; Dept: Welfare Schemes; Priority: 5; Status: Resolved; Desc: PM-SYM labour e-Shram card printouts pending at Kendra.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1046   | Sunil Banjara      | Village: Rampur; Dept: Water Supply; Priority: 5; Status: Resolved; Desc: Fluoride filtration unit media backwash overdue at school plant.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1047   | Suresh Verma       | Village: Sitapur; Dept: Electricity; Priority: 5; Status: Resolved; Desc: Bird-fault tripping on Rampur-Sitapur 11kV spur feeder.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1048   | Pradeep Thakur     | Village: Gopalpur; Dept: Roads; Priority: 5; Status: Resolved; Desc: Wooden footbridge planks rotted over seasonal nallah.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1049   | Manoj Saxena       | Village: Krishnapur; Dept: Sanitation; Priority: 5; Status: Resolved; Desc: Compost pit shed tin roof blown off in squall.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1050   | Bharti Menon       | Village: Balipur; Dept: Welfare Schemes; Priority: 10; Status: Resolved; Desc: Student pre-matric scholarship Aadhaar seeding correction needed.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1051   | Anita Pandey       | Village: Rampur; Dept: Water Supply; Priority: 5; Status: Resolved; Desc: Public drinking trough tap leaking beside cattle fair ground.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1052   | Alok Tripathi      | Village: Sitapur; Dept: Electricity; Priority: 5; Status: Resolved; Desc: Damaged meter terminal box after surge at Panchayat well.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1053   | Harinder Gill      | Village: Gopalpur; Dept: Roads; Priority: 5; Status: Resolved; Desc: Collapsed retaining brick wall along steep pond embankment.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1054   | Nitin Chaturvedi   | Village: Krishnapur; Dept: Sanitation; Priority: 5; Status: Resolved; Desc: Public handwashing unit drainpipe clogged at Anganwadi.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1055   | Bharti Menon       | Village: Balipur; Dept: Welfare Schemes; Priority: 5; Status: Resolved; Desc: KCC crop loan renewal no-dues certificate camp requested.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1056   | Deepak Patel       | Village: Rampur; Dept: Water Supply; Priority: 10; Status: Resolved; Desc: Turbid borewell supply after submersible motor vibration.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1057   | Seema Bhargava     | Village: Sitapur; Dept: Electricity; Priority: 5; Status: Resolved; Desc: Uninsulated jumper sparking near threshing yard.; Rating: 5/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1058   | Tarun Bhasin       | Village: Gopalpur; Dept: Roads; Priority: 5; Status: Resolved; Desc: Loose cobbles on inner lane outside cooperative bank.
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1059   | Meena Kulkarni     | Village: Krishnapur; Dept: Sanitation; Priority: 5; Status: Resolved; Desc: Sanitation tricycle tyres punctured blocking ward waste pickup.; Rating: 4/5
+2026-11-28 10:15:00 | CLI/FILE | GRIEVANCE_RESOLVE  | #1060   | Bharti Menon       | Village: Balipur; Dept: Welfare Schemes; Priority: 5; Status: Resolved; Desc: Ujjwala LPG subsidy bank linkage verification batch.

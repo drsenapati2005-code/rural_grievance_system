@@ -1,10 +1,63 @@
 # GRIEVANCES DATABASE
-# NEXT_TICKET_ID: 1008
+# NEXT_TICKET_ID: 1061
 # ticket_id|citizen_id|village_id|dept_id|is_hazard|priority|days_pending|assigned_official_id|status|submitted_at|resolved_at|rating|description|remarks|feedback
-1001|1|1|1|1|10|9|-1|Escalated|2026-11-24 17:15:12||0|High-tension live wire fallen across school road. Severe electrocution risk.|Sent to divisional lineman.|
-1002|2|2|0|0|5|8|-1|Pending|2026-11-24 17:15:12||0|Community handpump broken. 300 families without drinking water.||
-1003|3|3|2|1|10|4|-1|In Progress|2026-11-24 17:15:12||0|Large pothole filled with stagnant water blocking ambulance route to PHC.|Road crew dispatched. Repair ETA 2 days.|
-1004|4|4|4|0|5|2|-1|Pending|2026-11-24 17:15:12||0|MNREGA October wages not credited. 45 labourers affected.||
-1005|5|5|3|0|5|5|-1|Pending|2026-11-24 17:15:12||0|Open drain overflowing near primary school. Health hazard.||
-1006|1|1|1|0|5|0|-1|Resolved|2026-11-24 17:15:12|2026-11-24 17:15:12|4|All street lights on main bazaar road non-functional for 5 nights.|Fuse replaced and all lights restored.|Fixed quickly, good work!
-1007|2|2|0|1|10|1|-1|Pending|2026-11-24 17:15:12||0|Tap water appears brown/contaminated. Children falling sick.||
+1001|1|1|1|1|10|9|101|Escalated|2026-11-19 09:15:12||0|High-tension live wire fallen across school road. Severe electrocution risk.|Sent to divisional lineman team for pole isolation.|
+1002|2|2|0|0|5|8|102|Pending|2026-11-20 10:30:00||0|Community handpump broken near Ward 3. 300 families without drinking water.|Spare cylinder indented from block store.|
+1003|3|3|2|1|10|4|103|In Progress|2026-11-24 11:20:45||0|Large pothole filled with stagnant water blocking ambulance route to PHC.|Road crew dispatched with bitumen mix. ETA 2 days.|
+1004|4|4|4|0|5|2|105|Pending|2026-11-26 14:05:18||0|MNREGA October wages not credited for 45 registered labourers.|Muster roll audit queued at Block Welfare Desk.|
+1005|5|5|3|0|5|5|104|Pending|2026-11-23 08:50:10||0|Open storm drain overflowing beside Government Primary School.|Sanitation squad scheduled for silt clearance.|
+1006|1|1|1|0|5|0|101|Resolved|2026-11-18 16:10:00|2026-11-20 17:15:12|4|All street lights on main bazaar road non-functional for 5 nights.|Relay switch and fuse replaced; full stretch restored.|Fixed quickly, good work!
+1007|7|4|0|1|10|1|106|Pending|2026-11-27 09:40:22||0|Tap water appears brown and contaminated near Harijan Basti.|Water sample collected for orthotolidine lab check.|
+1008|6|1|2|1|10|10|103|Escalated|2026-11-18 07:45:00||0|Culvert bridge slab cracked near grain mandi; tractors cannot cross safely.|Barricades placed; PWD structural engineer alerted.|
+1009|8|2|3|1|10|3|104|In Progress|2026-11-25 12:15:30||0|Choked sewer chamber overflowing behind sub-health centre.|Suction tanker and disinfectant spray crew active on site.|
+1010|9|3|1|0|5|6|101|In Progress|2026-11-22 15:40:00||0|Severe voltage fluctuation damaging agricultural irrigation tube-well motors.|Load balancer tap inspection underway at 63kVA unit.|
+1011|10|5|2|0|10|7|103|Escalated|2026-11-21 10:12:05||0|Link road shoulder washed out near bus stand creating steep drop.|Retaining stone pitching approved; urgent repair active.|
+1012|11|4|1|1|10|2|101|In Progress|2026-11-26 11:05:44||0|Sparking feeder transformer leaking hot oil outside Anganwadi gate.|Feeder isolated; oil seal gasket replacement started.|
+1013|12|1|0|0|5|4|102|Pending|2026-11-24 08:25:19||0|Overhead tank sluice valve leaking continuously; West Tola supply pressure low.|Valve assembly requisitioned from PHE store.|
+1014|13|3|3|0|10|9|104|Escalated|2026-11-19 13:50:11||0|Solid-waste collection tractor inactive for 10 days; waste piling at market chowk.|Alternate tractor requisitioned by Block Nodal Officer.|
+1015|14|2|4|0|5|3|105|In Progress|2026-11-25 16:30:52||0|Old-age and widow pension verification list pending e-KYC clearance at Block HQ.|CSC biometric camp organized for 28 pending applicants.|
+1016|6|5|0|0|5|1|106|Pending|2026-11-27 11:18:09||0|Solar borewell inverter tripped at northern hamlet drinking point.|Solar technician inspection scheduled tomorrow morning.|
+1017|2|2|2|0|5|0|103|Resolved|2026-11-14 09:20:00|2026-11-17 16:40:00|5|Gravel resurfacing needed along Panchayat Bhavan approach lane.|200m gravel compaction and roller levelling completed.|Smooth road now, even ambulance enters easily!
+1018|3|3|0|1|10|0|102|Resolved|2026-11-15 07:30:00|2026-11-16 14:15:00|5|Main drinking water pipeline burst near canal crossing.|HDPE collar joint clamped and pressure tested cleanly.|Water restored within 30 hours. Very responsive team.
+1019|4|4|3|0|5|0|104|Resolved|2026-11-13 11:00:00|2026-11-16 18:05:00|4|Desilting and bleaching of community soak-pit drains required.|All 6 soak pits desilted and chlorinated.|Clean surroundings now, appreciate the follow-up.
+1020|5|5|1|1|10|0|101|Resolved|2026-11-12 18:10:00|2026-11-14 13:20:00|5|Leaning LT electricity pole over livestock shed after windstorm.|Pole straightened with concrete collar and guy wire anchored.|Saved our cattle shed before nightfall, thank you.
+1021|8|2|1|0|5|0|101|Resolved|2026-11-16 10:00:00|2026-11-19 15:45:00|3|Frequent fuse blowouts along dairy cooperative feeder line.|Upgraded HRC fuse rating and tightened loose jumper clamps.|Issue solved, though response took three days.
+1022|9|3|4|0|5|0|105|Resolved|2026-11-14 12:40:00|2026-11-18 17:10:00|5|Ration card e-KYC family member linkage stuck for 12 households.|District Supply portal sync completed for all 12 families.|Everyone received November quota smoothly.
+1023|10|1|4|0|5|0|105|Resolved|2026-11-17 10:15:00|2026-11-21 16:00:00|0|PM-KISAN Aadhaar land record seeding camp requested for smallholders.|Special Gram Sabha verification camp held; 34 farmers updated.|
+1024|1|5|4|0|5|0|105|Resolved|2026-11-18 14:50:00|2026-11-22 15:25:00|0|MNREGA job-card renewal batch pending for Ward 2 agricultural workers.|19 renewed job cards issued and verified at Panchayat Kendra.|
+1025|16|1|4|0|5|3|111|In Progress|2026-11-25 10:15:00||0|Maternity benefit disbursement delayed for 9 registered mothers in Rampur.|PFMS bank account validation cleared for 7 beneficiaries.|
+1026|17|2|2|0|5|2|113|Pending|2026-11-26 09:05:00||0|Broken speed-breaker slabs near Sitapur High School entrance.|Bitumen patch estimate prepared by junior engineer.|
+1027|18|3|0|1|10|4|112|In Progress|2026-11-24 13:20:00||0|Main chlorinator dosing pump failed at Gopalpur overhead reservoir.|Emergency manual dosing running; standby pump dispatched.|
+1028|19|3|4|0|10|8|116|Escalated|2026-11-20 11:45:00||0|Crop insurance hailstorm loss survey pending for 18 marginal farmers.|Revenue-agriculture joint verification team mobilized.|
+1029|20|4|3|1|10|7|110|Escalated|2026-11-21 14:10:00||0|Dead livestock carcass disposal pit flooded near Krishnapur eastern bund.|Sanitation team with lime & earthmover deployed urgently.|
+1030|21|5|1|1|10|1|109|Pending|2026-11-27 16:05:00||0|Snapped service drop cable sparking above Balipur ration shop roof.|Lineman alerted for morning shutoff and cable replacement.|
+1031|8|1|0|0|5|0|102|Resolved|2026-11-01 08:00:00|2026-11-03 11:00:00|5|Check-dam sluice shutter jammed near irrigation tank.|Gate lubricated and rubber gasket seated.|Water flow stabilized immediately.
+1032|11|2|1|1|10|0|109|Resolved|2026-11-02 09:07:00|2026-11-05 12:11:00|4|Damaged capacitor bank at rural 11kV substation bay.|Capacitor bank unit swapped; power factor restored.|Voltage improved significantly after repair.
+1033|14|3|2|0|5|0|117|Resolved|2026-11-03 10:14:00|2026-11-07 13:22:00|5|Waterlogged bus-stop layby causing passenger slip hazard.|Stone aggregate compacted and side trench cleared.|Clean dry platform now, thank you.
+1034|17|4|3|0|5|0|120|Resolved|2026-11-04 11:21:00|2026-11-06 14:33:00|4|Blocked culvert grating collecting plastic debris near school.|Grating cleared and wire-mesh trap fitted.|No stagnation during last rain.
+1035|20|5|4|0|5|0|125|Resolved|2026-11-05 12:28:00|2026-11-08 15:44:00|5|Widow pension bank IFSC migration pending post bank merger.|Bulk IFSC code update pushed cleanly.|Pension credited for this month.
+1036|23|1|0|0|5|0|106|Resolved|2026-11-06 13:35:00|2026-11-10 16:55:00|4|Handpump platform apron cracked letting dirty runoff seep in.|Concrete apron rebuilt with soak-pit channel.|Platform is clean and hygienic now.
+1037|26|2|1|0|5|0|114|Resolved|2026-11-07 14:42:00|2026-11-09 17:06:00|5|Loose neutral conductor causing flickering in Harijan Basti.|Neutral lug crimped and load rebalanced.|Bulbs and fans running steadily.
+1038|2|3|2|1|10|0|122|Resolved|2026-11-08 15:49:00|2026-11-11 11:17:00|5|Overgrown thorny scrub narrowing blind turn toward canal road.|Roadside jungle clearance completed for 600m.|Clear visibility for morning school vans.
+1039|32|4|3|0|5|0|104|Resolved|2026-11-09 16:56:00|2026-11-13 12:28:00|4|Mosquito fogging overdue around low-lying paddy fringes.|Thermal fogging & larvicide spray conducted twice.|Much better at dusk now.
+1040|35|5|4|0|5|0|125|Resolved|2026-11-10 08:03:00|2026-11-12 13:39:00|5|PMAY-G second installment geo-tag photo verification stuck.|AwaasSoft inspection uploaded on site.|Installment approved within 48 hours.
+1041|11|1|0|0|5|0|112|Resolved|2026-11-11 09:10:00|2026-11-14 14:50:00|4|Standpost brass tap stolen leaving community point running continuously.|Heavy-duty pushcock tap installed and locked.|Stops water wastage cleanly.
+1042|41|2|1|0|5|0|119|Resolved|2026-11-12 10:17:00|2026-11-16 15:01:00|5|High-mast solar tower battery controller fault at bazaar chowk.|MPPT controller replaced under warranty.|Chowk brightly lit all night.
+1043|44|3|2|0|5|0|103|Resolved|2026-11-13 11:24:00|2026-11-15 16:12:00|4|Missing kilometer milestones and curve warning boards on link road.|Reflective signage and painted stones installed.|Much safer for night riders.
+1044|1|4|3|1|10|0|110|Resolved|2026-11-14 12:31:00|2026-11-17 17:23:00|3|Community toilet overhead tank float valve broken.|PVC ballcock replaced and plumbing checked.|Works fine now, took a few reminders.
+1045|4|5|4|0|5|0|125|Resolved|2026-11-15 13:38:00|2026-11-19 11:34:00|5|PM-SYM labour e-Shram card printouts pending at Kendra.|Kendra batch printed and distributed 26 cards.|Helpful staff and zero hassle.
+1046|7|1|0|0|5|0|118|Resolved|2026-11-01 14:45:00|2026-11-03 12:45:00|5|Fluoride filtration unit media backwash overdue at school plant.|Activated alumina media regenerated and tested.|Water tastes clean again.
+1047|10|2|1|0|5|0|101|Resolved|2026-11-02 15:52:00|2026-11-05 13:56:00|4|Bird-fault tripping on Rampur-Sitapur 11kV spur feeder.|Insulator hoods installed along 14 span poles.|No trippings in five days.
+1048|13|3|2|0|5|0|113|Resolved|2026-11-03 16:59:00|2026-11-07 14:07:00|5|Wooden footbridge planks rotted over seasonal nallah.|Replaced with bolted precast concrete slabs.|Very sturdy work by road team.
+1049|16|4|3|0|5|0|115|Resolved|2026-11-04 08:06:00|2026-11-06 15:18:00|4|Compost pit shed tin roof blown off in squall.|Corrugated sheets re-bolted with J-hooks.|Protected before rains started.
+1050|19|5|4|1|10|0|125|Resolved|2026-11-05 09:13:00|2026-11-08 16:29:00|5|Student pre-matric scholarship Aadhaar seeding correction needed.|Verified 17 student bank mappings with school.|Payments cleared cleanly.
+1051|22|1|0|0|5|0|102|Resolved|2026-11-06 10:20:00|2026-11-10 17:40:00|4|Public drinking trough tap leaking beside cattle fair ground.|Installed heavy brass bibcock with masonry collar.|Dry ground now, clean water for cattle.
+1052|25|2|1|0|5|0|109|Resolved|2026-11-07 11:27:00|2026-11-09 11:51:00|5|Damaged meter terminal box after surge at Panchayat well.|Weatherproof polycarbonate box & MCB fitted.|Pump running safely again.
+1053|28|3|2|0|5|0|117|Resolved|2026-11-08 12:34:00|2026-11-11 12:02:00|5|Collapsed retaining brick wall along steep pond embankment.|Constructed 18m stepped stone retaining wall.|Pathway feels completely secure now.
+1054|31|4|3|0|5|0|120|Resolved|2026-11-09 13:41:00|2026-11-13 13:13:00|4|Public handwashing unit drainpipe clogged at Anganwadi.|Replaced 40mm trap pipe and cleared gully.|Children can wash hands easily.
+1055|34|5|4|0|5|0|125|Resolved|2026-11-10 14:48:00|2026-11-12 14:24:00|5|KCC crop loan renewal no-dues certificate camp requested.|Joint revenue-bank counter cleared 22 files.|Saved multiple trips to block town.
+1056|37|1|0|1|10|0|106|Resolved|2026-11-11 15:55:00|2026-11-14 15:35:00|4|Turbid borewell supply after submersible motor vibration.|Pulled riser pipe, replaced worn brass bush.|Clear water pumped cleanly.
+1057|40|2|1|0|5|0|114|Resolved|2026-11-12 16:02:00|2026-11-16 16:46:00|5|Uninsulated jumper sparking near threshing yard.|Replaced with shrouded ABC connector clamp.|Prevented fire risk during harvest.
+1058|2|3|2|0|5|0|122|Resolved|2026-11-13 08:09:00|2026-11-15 17:57:00|0|Loose cobbles on inner lane outside cooperative bank.|Re-laid interlocking pavers over compacted sand.|
+1059|46|4|3|0|5|0|104|Resolved|2026-11-14 09:16:00|2026-11-17 11:08:00|4|Sanitation tricycle tyres punctured blocking ward waste pickup.|Solid puncture-proof tyres fitted across 4 carts.|Daily door-to-door pickup resumed.
+1060|6|5|4|0|5|0|125|Resolved|2026-11-15 10:23:00|2026-11-19 12:19:00|0|Ujjwala LPG subsidy bank linkage verification batch.|Completed NPCI mapper check for 15 families.|

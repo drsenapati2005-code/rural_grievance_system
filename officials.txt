@@ -1,6 +1,28 @@
 # OFFICIAL ACCOUNTS REGISTRY
-# NEXT_OFFICIAL_ID: 104
+# NEXT_OFFICIAL_ID: 126
 # official_id|username|password|dept_assigned|active|name
 101|sverma|pass101|1|1|Suresh Verma
 102|apandey|pass102|0|1|Anita Pandey
 103|rtiwari|pass103|2|1|Rajan Tiwari
+104|mkulkarni|pass104|3|1|Meena Kulkarni
+105|vyadav|pass105|4|1|Vinod Yadav
+106|dpatel|pass106|0|1|Deepak Patel
+107|rsingh|pass107|-1|1|Rajeshwar Singh
+108|kmishra|pass108|2|0|Kavita Mishra
+109|atripathi|pass109|1|1|Alok Tripathi
+110|vjoshi|pass110|3|1|Vandana Joshi
+111|rgupta|pass111|4|1|Rameshwar Gupta
+112|nchaudhary|pass112|0|1|Neha Chaudhary
+113|pthakur|pass113|2|1|Pradeep Thakur
+114|sbhargava|pass114|1|1|Seema Bhargava
+115|msaxena|pass115|3|1|Manoj Saxena
+116|kdeshmukh|pass116|4|1|Kalyani Deshmukh
+117|hgill|pass117|2|1|Harinder Gill
+118|sbanjara|pass118|0|1|Sunil Banjara
+119|prathore|pass119|1|1|Pooja Rathore
+120|nchaturvedi|pass120|3|1|Nitin Chaturvedi
+121|rsengar|pass121|4|1|Rekha Sengar
+122|tbhasin|pass122|2|1|Tarun Bhasin
+123|anair|pass123|-1|1|Dr. Asha Nair
+124|ykoli|pass124|0|0|Yogeshwar Koli
+125|bmenon|pass125|4|1|Bharti Menon
